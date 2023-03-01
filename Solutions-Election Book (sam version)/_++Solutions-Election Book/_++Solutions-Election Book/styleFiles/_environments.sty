@@ -1,0 +1,169 @@
+%% ----------------------------------------------------------------
+%%
+%%    Frequently used environments
+%%    	written by Ole J. Forsberg
+%%
+%% ----------------------------------------------------------------
+
+
+\lstloadlanguages{R}
+%\lstdefineformat{C}{\~=$\sim$,\^=$\caret$}
+\lstdefineformat{Rformat}{\~=$\sim$,\^=$\caret$}
+
+\lstset{
+  language=R,
+  format=Rformat,
+%
+  basicstyle=\ttfamily\small\color{blue},
+  keywordstyle=\ttfamily\small,
+  commentstyle=\color{toshiro},
+%
+  breakatwhitespace=false,  % sets if automatic breaks should only happen at whitespace
+  breaklines=true,          % sets automatic line breaking
+  showstringspaces=false,   % suppresses the underscore space indicator in strings
+%
+  xleftmargin=1em,
+  keepspaces=true,          % keeps spaces in text, useful for keeping indentation of code
+  tabsize=2,                % sets default tabsize to 2 spaces
+%
+  columns=fixed,
+  basewidth=0.6em
+}
+
+
+
+
+
+
+
+
+
+%%% This is for lines of code (input)
+\lstnewenvironment{codein}
+    {\lstset{format=Rformat,language=R,basicstyle=\color{black}\ttfamily\footnotesize, frame=L, rulecolor=\color{blue}, framerule=1pt, framesep=2em, aboveskip=1em, belowskip=1em, xleftmargin=25pt, commentstyle=\color{blue}}}
+    {}
+%
+
+
+%%% This is for lines of code (output)
+\lstnewenvironment{codeout}
+    {\lstset{format=Rformat,language=R,basicstyle=\color{black}\ttfamily\footnotesize, frame=L, rulecolor=\color{gray}, framerule=1pt, framesep=2em, aboveskip=1em, belowskip=1em, xleftmargin=25pt}}
+    {}
+
+
+
+
+%%%%% This is for inline code
+\newcommand{\code}[1]{\lstinline[format=Rformat,basicstyle=\color{black}\ttfamily]!#1!}
+
+
+
+
+
+
+
+
+
+%%%%% for notes
+\newenvironment{note}
+  { \vspace{12pt}%
+    \noindent\textbf{\textcolor{blue}{Note}}:\begin{em}}%
+    {\end{em}\vspace{1em}%
+	}%
+%
+
+
+
+\renewenvironment{quote}%
+  {\vspace{1ex}\begin{list}{}%
+    {\setlength{\leftmargin}{2em}}%
+    \item[]%
+  }
+  {\end{list}\vspace{1ex}}%
+
+
+
+
+
+%%%%% for aside comments
+\newenvironment{aside}
+  {\vspace{1em}%
+    \begin{list}{}%
+    {\setlength{\leftmargin}{2em}}%
+%    \setlength{\parskip}{1em}%
+    \setlength{\parindent}{2em}%
+    \item[]%
+    \noindent\textbf{\textcolor{black}{Aside}}. \begin{em}%
+  }%
+  {\end{em}\end{list}\vspace{1em}}%
+%
+
+
+
+
+%%%%% for experiments
+\@ifundefined{experiment}
+  {%
+    \newenvironment{experiment}
+      {\vspace{2em}\noindent\rule{0.5\textwidth}{0.8pt}\par%
+      \vspace{0.25ex}\noindent{\color{blue}{\textbf{Experiment}:}}}
+      {\vspace{1pt}\begin{center}$\diamond\diamond\diamond$\end{center}\vspace{1em}}
+  }
+  {%
+    \renewenvironment{experiment}
+      {\vspace{2em}\noindent\rule{0.5\textwidth}{0.8pt}\par%
+      \vspace{0.25ex}\noindent{\color{blue}{\textbf{Experiment}:}}}
+      {\vspace{1pt}\begin{center}$\diamond\diamond\diamond$\end{center}\vspace{1em}}
+  }%
+
+
+
+
+
+
+
+%
+
+
+
+
+
+
+
+%\newenvironment{bigquote}
+%  {\vspace{2em}\noindent\begin{itshape}\begin{center}}
+%  {\par\end{center}\end{itshape}\vspace{2em}}
+
+
+
+
+%%%%% for solutions
+\newenvironment{solution}
+  { \newline%
+    \noindent\textbf{\textcolor{red}{Solution}}:\begin{em}}%
+    {\end{em} \newline \vspace{2em}%
+	}%
+%
+
+
+
+
+  %%
+
+
+
+
+
+
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+
+
+
+
+
+
+

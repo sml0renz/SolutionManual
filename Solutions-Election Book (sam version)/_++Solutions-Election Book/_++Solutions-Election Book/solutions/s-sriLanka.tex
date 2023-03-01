@@ -1,0 +1,520 @@
+\chapter{In-Depth Analysis: Sri Lanka since 1994}\label{ch:sri}
+
+
+%%% ### %%% ### %%% ### %%% ### %%% ### %%% ### %%% ### %%% ### %%% ### %%%%
+\begin{extract}
+This chapter examines the six Sri Lankan presidential elections between 1994 and 2019 for empirical evidence of persistent electoral unfairness in favor of the government-supported candidates. While regression tests for differential invalidation are the primary methods used, geography will help to illustrate some of the findings --- and to provide additional questions.
+\end{extract}
+
+
+
+
+
+
+
+%%% ### %%% ### %%% ### %%% ### %%% ### %%% ### %%% ### %%% ### %%% ### %%% ### %%%
+%%% ### Chapter Hook, Sri Lanka President 2015
+%
+\noindent
+Among other things, the run-up to the 2015 presidential election in Sri Lanka brought back memories of the consequences of the Rajapaksa-Fonseka 2010 election, which was marked by election-day violence, claims of vote-rigging, and the arrest of a political opponent.\cite{afp-2015,cmev-2010,hrw-2015} It also reminded the region --- and the world --- of the recent history of Sri Lankan elections. These elections have, without exception, been of questionable nature. Election-day violence has marred every post-independence presidential election in Sri Lanka.\cite{gross-2000,sri-lanka-brief-2018} Examples of voter-intimidation are frequent; claims of fraud, endemic; and patterns of electoral bias against the ethnic minority Tamil, pervasive.\cite{afp-2015, gulf-times-2013, hensman-2010, hrw-2015,samarasinghe-1989} Election observers have watched the elections. In each election, they have graded Sri Lanka as being less than fully democratic, noting the above intimidation and violence keeping people away from the polls.\cite{chellaney-2018, EU-2004, fh-2016}
+
+
+\emph{However}, do such electoral issues of unfairness extend to after the vote is cast? Is there evidence that ballots are treated differently given who they are cast for or given who cast them?
+
+
+To test such questions of unfairness in the ballot counting, this chapter starts with the necessary, though not sufficient, condition for a fair democratic election we discussed in Chapter~\ref{ch:regression} and again shows that regression is an appropriate method for testing that necessary condition. Neither ordinary least squares nor weighted least squares should be used, as two requirements are violated by the very nature of this discrete and heteroskedastic data.\cite{mebane-sekhon-2004} Instead, this chapter uses beta-binomial regression, which models a discrete dependent variable that is bounded above and is overdispersed.\cite{yee-2015,yee-wild-1996}\index{overdispersion}
+
+Applying this regression method to the Sri Lankan presidential elections from 1994 until 2019 strongly suggests a consistent unfairness in Sri Lankan presidential elections that always benefits the government-supported candidate. In each of the elections, we find a statistically significant relationship between the invalidation rate and the support for the government candidate. This finding is consistent with differential invalidation. This finding is also consistent with electoral bias against the minority Tamils, who tend to not support the government-supported candidates. 
+
+
+
+%%%%% ##### %%%%% ##### %%%%%
+%%% Sri Lankan Map
+\begin{figure}
+\begin{center}
+\includegraphics[width=0.48\textwidth]{chapters/sriLanka/sri2015pres-map-raj}
+\hfill
+\includegraphics[width=0.48\textwidth]{chapters/sriLanka/sri2015pres-map-inv}
+\end{center}
+\caption[Map of 2015 Sri Lankan presidential election results.]{Maps of the 2015 Sri Lankan presidential election results. The left panel is the vote share for incumbent Mahinda Rajapaksa; the right, the invalidation rate. These data are from \cite{sri2015pres}.}
+\label{fig:sriLanka-sri2015pres}
+\end{figure}
+%%
+
+
+Tamils tend to live in the north and east of Sri Lanka. Figure~\ref{fig:sriLanka-sri2015pres} illustrates two things about the 2015 election. First, the left panel shows that the incumbent's area of support was not in the Tamil areas. This is not surprising, as Rajapaksa led the Sri Lankan military in its civil war against the Tamils. Second, the right panel shows that the areas with the highest invalidation rate are those same Tamil areas.
+
+Will we be able to detect differential invalidation over and above that related to the Tamils? Also, was the 2015 an aberration in an otherwise fair electoral process in Sri Lanka?
+
+
+
+
+
+
+
+
+
+
+
+
+
+%%% ### %%% ### %%% ### %%% ### %%% ### %%% ### %%% ### %%% ### %%% ### %%% ### %%%
+
+
+
+
+
+
+
+
+
+
+
+%%% ### %%% ### %%% ### %%% ### %%% ### %%% ### %%% ### %%% ### %%% ### %%%%
+\section{Differential Invalidation}\index{differential invalidation|textbf}\label{sriLanka-diffInv}
+Recall from Chapter~\ref{ch:regression} that many definitions of democracy exist.\cite[e.g.]{dahl-shapiro-2015,lijphart-1999,putnam-2001} In each, a necessary condition for a ``free and fair'' democratic election is that each person's vote counts the same. While several countries use computers to ensure that all submitted ballots are properly completed before the voter leaves the booth, not all do. In those electoral systems that do not, voters may complete their ballot paper incorrectly. These ballots are then licitly invalidated by the vote counters. In the presence of such invalidation, a necessary condition for a free and fair democratic election is that each person's ballot has the same \emph{probability of being counted}, regardless of the voter's demographics or for whom the ballot was cast. When this is not the case, the election is unfair towards that particular demographic --- or towards the supporter of the ``wrong'' candidate.\cite{ekanem-forsberg-2018}
+
+When ballots are systematically invalidated based on demographics or on candidate preference --- a condition called ``differential invalidation'' --- then a statistically significant relationship between the invalidation rate and the proportion belonging to that demographic or voting for that candidate in the electoral division may be detectable.\cite{forsberg-2014} That is, a statistically significant relationship between the invalidation rate and the candidate support rate at the electoral division level is evidence of differential invalidation --- and electoral unfairness. As such, testing for differential invalidation is relatively straightforward, provided the necessary data are available. Testing for differential invalidation requires the following data at the division level: the number of ballots cast, the number of ballots invalidated, and the number of ballots for the given candidate.\cite{ekanem-forsberg-2018, forsberg-2014}
+
+
+
+
+
+
+
+
+
+
+
+
+
+%%% ### %%% ### %%% ### %%% ### %%% ### %%% ### %%% ### %%% ### %%% ### %%%%
+\section{Methods and Data}
+Since the null hypothesis is that there is no relationship between the two numeric variables (the invalidation rate and the candidate support rate) it may seem completely appropriate to use ordinary least squares (OLS) regression to model the relationship.\index{regression!OLS} However, as discussed in Section~\ref{sec:reg-ols}, two problems arise. The first problem is that OLS requires the dependent variable to be Normally distributed, conditional on the value of the independent variable. With this type of data, this requirement is not met for two reasons: the dependent variable is discrete, and the dependent variable is bounded.
+
+The second problem is that the dependent variable is inherently heteroskedastic.\cite{ekanem-forsberg-2018, kutner-nachtsheim-neter-2004, mebane-sekhon-2004} Because the dependent variable is bounded below by 0 and above by the turnout, the variance cannot be constant; measurements closer to the upper and lower bounds necessarily have lower variation than those near the middle. Using weighted least squares (WLS)\index{regression!WLS} could solve the heteroskedasticity violation, but it does not solve the fact that the data are discrete (counts).
+
+Because of these features of the data, neither OLS nor WLS is appropriate.\index{regression!GLM}\index{regression!binomial} As in Section~\ref{sec:reg-glm}, generalized linear models (GLMs) offer a more-general paradigm for handling regression when the dependent variable conditionally follows a non-Normal distribution.\cite{mccullagh-nelder-2000,nelder-wedderburn-1972} As such, one could use binomial regression via such a generalized linear model. This would allow us to better model the dependent variable. It would also help with the heteroskedasticity. The problem is that the dependent variable does not follow a binomial distribution. Because similar people live close together, the success probability (base probability of invalidating a ballot) will not be constant across the divisions. This violates one of the requirements of a binomial distribution. A major consequence of this is that invalidation rates will tend to be overdispersed.\cite{ekanem-forsberg-2018, mebane-sekhon-2004, smith-2002} That is, they do not follow a binomial distribution.
+
+As such, an appropriate regression method must also take this overdispersion into consideration. One can handle overdispersion in a couple ways. One is to simply allow for the estimation method to estimate the level of overdispersion (quasi-maximum likelihood estimation).\cite{mccullagh-nelder-2000, venables-ripley-2003} This has the advantage of being easily performed using most common statistical programs. The drawback to this solution is that it is relatively restrictive in modeling the distribution of the dependent variable. It only handles dependent variables that are effectively binomial, but have a higher level of variation than allowed for in a binomial distribution.
+
+In Section~\ref{sec:reg-vglm}, we discovered an arguably better way to handle overdispersion: We used a different error distribution, one that is more flexible in modeling this overdispersion. One such distribution is the beta-binomial distribution.\cite{skellam-1948,yee-2015} This distribution includes the binomial as a limiting special case. As a result, if there is no overdispersion, then the beta-binomial will be as appropriate as the binomial.\index{regression!VGLM}
+
+Fitting a dependent variable with a beta-binomial distribution is complicated by the fact that this distribution is not a member of the exponential class of distributions. Thus, the modeling cannot be performed within the GLM paradigm. A useful extension of the GLM to several additional distribution families takes place using the vector generalized linear model (VGLM) paradigm.\cite{yee-2015}
+
+
+
+
+
+
+
+%%% ### %%% ### %%% ###
+\subsection{The Beta-Binomial Distribution}\index{regression!beta-binomial|textbf}
+The beta-binomial distribution is a binomial distribution in which the success probability parameter $\pi$ is a random variable that follows a beta distribution.\cite{skellam-1948} That is, since the probability mass function of the binomial distribution is
+\begin{equation}
+h(x; n, \pi) = \binom{n}{x}\ \pi^x (1-\pi)^{n-x}
+\end{equation}
+and the probability density function of the beta distribution is
+\begin{equation}
+g(\pi; \alpha, \beta) = B(\alpha, \beta)\ \pi^{\alpha-1} (1-\pi)^{\beta-1}
+\end{equation}
+then the probability mass function of the beta-binomial distribution is
+\begin{align}
+f(x; n, \alpha, \beta) &= \int_0^1 \binom{n}{x} \pi^x (1-\pi)^{n-x}\ B(\alpha, \beta) \pi^{\alpha-1} (1-\pi)^{\beta-1} \D{\pi} \\[1em]
+	&= \binom{n}{x}\ \frac{B(x+\alpha, n-x+\beta)}{B(\alpha, \beta)}
+\end{align}
+Here, $B(\alpha, \beta) = \frac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha+\beta)}$ is the beta function, and $\Gamma(x) = \int_0^\infty t^{x-1}e^t \D{t}$ is the gamma function.\footnote{For the mathematicians amongst us, note that as $\alpha \rightarrow \infty$ and $\beta \rightarrow \infty$, the beta-binomial distribution converges in distribution to the binomial distribution. I leave this as an exercise for you.}
+
+Because the beta-binomial distribution has two parameters and is not a member of the exponential family of distributions, one cannot use the generalized linear model paradigm. One must use the related vector generalized linear model (VGLM) method.\cite{yee-2010,yee-2015} From a practical standpoint, this just requires a different function, \texttt{vglm} in lieu of \texttt{glm} in the \R\ Statistical Environment.\cite{rprogram}\index{\var{glm}}\index{\var{vglm}}
+
+
+
+
+
+
+
+
+
+%%% ### %%% ### %%% ###
+\subsection{Data}
+As this is ultimately a test of the Sri Lankan government and its claim of a ``free and fair'' election, the data are the official counts as provided by the Sri Lankan Election Commission website.\cite{sri1994pres,sri1999pres, sri2005pres,sri2010pres,sri2015pres,sri2019pres} Sri Lanka has nine provinces, 25 districts, and a total of $n=160$ electoral divisions.\cite{electioncommission-2018a}
+
+Due to data scarcity brought about by the civil war (1983--2004), the Tamil-dominated districts in the north (Jaffna and Vanni) were removed from consideration in 1994, 1999, and 2005. For the sake of consistency, they were also removed for the elections of 2010 and 2015.\footnote{Also removed are the ``Postal'' votes and ``Displaced'' votes, as they cannot be assigned to a division from the information provided by the Sri Lankan government.} Note that removing the northern electoral divisions means any evidence of differential invalidation is independent of the Tamil question.
+
+All of these deletions were done to make the model statistically more sound. From the standpoint of the substantive conclusions, however, these deletions tend to not be practically significant. Performing the analyses with the entire data set changed the substantive results only in the 2015 election, where the differential invalidation only becomes statistically significant with the addition of Jaffna and Vanni districts.
+
+The dependent variable in the model is the count of invalidated ballots. The independent variable is the proportion of the votes cast in favor of the government candidate. Over the course of the five elections, the invalidation rate at the electoral division level ranged from 0.48\% (Galgamuwa in 2010) to 5.94\% (Haputale in 1994), with a median of 1.27\%. The support rate for the government candidate at the division level ranged from 3.6\% (Rajapaksa in Padiruppu in 2005) to 94.2\% (Kumaratunga in Mahiyanganaya in 1994).
+
+
+
+
+
+
+
+
+
+
+
+%%% ### %%% ### %%% ### %%% ### %%% ### %%% ### %%% ### %%% ### %%% ### %%%%
+\section{Results by Election}
+The numeric results of the analyses are provided in Table~\ref{tab:sri-resultsTable}. The first column provides the election year and the main candidates, with the government-supported candidate listed first. The second column gives the estimate, and the final column the endpoints of the typical 95\% confidence interval for the candidate support effect.
+
+
+\begin{table}[t]\centering
+\begin{small}
+\begin{tabular}{lrc}
+{\bf Election} & \multicolumn{2}{c}{{\bf Estimated Support Effect}\phantom{X}} \\
+\midrule
+1994 (Kumaratunga \textit{v}. Dissanayake) 	& $-1.90$ & $(-2.72, -1.09)$ \\[1ex]
+1999 (Kumaratunga \textit{v}. Wickremesinghe) & $-1.07$ & $(-1.63, -0.52)$ \\[1ex]
+2005 (Rajapaksa   \textit{v}. Wickremesinghe) & $-1.08$ & $(-1.36, -0.81)$ \\[1ex]
+2010 (Rajapaksa   \textit{v}. Fonseka) 		& $-2.28$ & $(-2.60, -1.96)$ \\[1ex]
+2015 (Rajapaksa   \textit{v}. Sirisena) 	& $-0.28$ & $(-0.61, \phantom{-}0.05)$ \\
+                                            & $-1.08$ & $(-1.42, -0.73)$ \\[1ex]
+2019 (Rajapaksa   \textit{v}. Premadasa) 	& $-0.67$ & $(-0.95, -0.38)$ \\
+                                            & $-1.42$ & $(-1.64, -1.20)$ \\
+\end{tabular}
+\end{small}
+\caption[Regression results for the six elections]{Regression results for the six elections. The numbers in the second column are the estimated effect levels. Those in the last column represent the endpoints of the central 95\% confidence interval for the support effect parameter. Negative candidate support intervals indicate statistically significant evidence of unfairness in favor of that candidate. The second set of numbers for the 2015 and 2019 elections are for the model including the Jaffna and Vanni districts.}
+\label{tab:sri-resultsTable}
+\end{table}
+
+
+
+
+
+
+
+
+
+
+
+
+
+%%% ### %%% ### %%% ###
+\subsection{The 1994 Election}
+The November 1994 election was set during the Sri Lankan civil war. In 1993, the Tamil Tigers (LTTE) successfully assassinated President Ranasinghe Premadasa of the United National Party (UNP). Prime Minister Dingiri Banda Wijetunga succeeded him, but decided to not run in the upcoming election. Because of this decision, the UNP named Gamini Dissanayake as their candidate.\cite{hensman-2010}
+
+Dissanayake's challenger was Prime Minister Chandrika Kumaratunga of the People's Alliance (PA). Kumaratunga became prime minister when her party took control of the Parliament in the August 1994 parliamentary elections. Because her party controlled parliament, she is considered the ``government-supported'' candidate in this election. Kumaratunga received 62\% of the votes counted in the November presidential election.\cite{state-2004}
+
+To perform this analysis, we load the 1994 election file for Sri Lanka and load the VGAM package. Then, to use the beta-binomial distribution to model the invalidation rate, we use this code\index{\var{vglm}}\index{\var{confint}}\index{\var{cbind}}
+\begin{codein}
+tot = dt$Total
+inv = dt$Rejected
+val = tot-inv
+px  = dt$PA/val  ## People's Alliance candidate support
+
+depVar = cbind(inv,val)
+modBB94a = vglm(depVar~px, family=betabinomial)
+summary(modBB94a)
+confint(modBB94a)
+\end{codein}
+
+\noindent
+The first block of code captures the number of invalid ballots, total ballots, and votes for the People's Alliance candidate, as reported by the government (with Jaffna and Vanni districts removed). The bottom block of code performs the regression, produces the regression table, and estimates the 95\% confidence intervals for the estimates.
+
+The heavily abbreviated output from this code is
+\begin{codeout}
+Coefficients:
+              Estimate Std. Error z value Pr(>|z|)
+px             -1.9020     0.4167  -4.565    5e-06 ***
+\end{codeout}
+
+\noindent
+and
+
+\begin{codeout}
+                  2.5 %    97.5 %
+px            -2.718664 -1.085398
+\end{codeout}
+
+\noindent
+This  output tells us that the estimated effect of Kumaratunga support on the logit of the invalidation rate is $-1.9020$ with a 95\% confidence interval from $-2.718664$ to $-1.085398$. This effect is statistically distinct from $0$ because the p-value is so small (about $0.000005$).
+
+In other words, differential invalidation was detected in this election that favored the government candidate. The point estimate of $-1.9020$ indicates that for every 10-percentage point increase in support for Kumaratunga in the division, the probability of a ballot being invalidated decreases by about 17\% ($=1-e^{-1.0920 \times 0.10}$). That is, ballots were more likely to be counted in divisions that supported the government candidate than in those divisions that did not.
+
+\begin{figure}[t]
+\includegraphics[width=0.96\textwidth]{chapters/sriLanka/election-1994}
+\caption[Invalidation plot for the 1994 presidential election]{A plot of the invalidation rate against the support for the government candidate in the 1994 election. The dots represent the electoral divisions. The negative slope to the regression curve indicates differential invalidation helped Kumaratunga in the election.}
+\label{fig:sri-elx1994}
+\end{figure}
+
+Figure~\ref{fig:sri-elx1994} illustrates this conclusion: Divisions with higher levels of support for Kumaratunga had a lower invalidation rate --- i.e., a greater proportion of their votes counted. This is \textit{prima facie} evidence of unfairness in this election. Since the Tamil-dominant areas are not a part of this regression, this is evidence that the differential invalidation specifically helped the government-supported candidate.
+
+Note that this is just a test and is not for retrieving the true number of ballots cast for the candidates, nor is it an argument that the challenger would have won had the differential invalidation not taken place. To perform those analyses, one would have to determine what the ``real'' invalidation rate is for each division. This is currently beyond the scope of what we are able to accomplish --- currently.\footnote{There is some exciting research taking place at Baylor University that applies to this particular problem. Nelson et al. are looking at Bayesian methods for retrieving correct counts from error-prone data.\cite{nelson-etal-2018} While they are specifically looking at crime rates, their choice of framing this in terms of count data is exciting.} The purpose of this analysis is merely to look for evidence of differential invalidation, not to determine if that differential invalidation swung the election.
+
+
+
+
+
+
+
+
+%%% ### %%% ### %%% ###
+\subsection{The 1999 Election}
+The December 1999 election saw Kumaratunga defend her presidency against Ranil Wickremesinghe of the United National Party (UNP). Kumaratunga's People's Alliance remained in control of the parliament, making her the government-supported candidate. She won a second term with 51\% of the votes counted.\cite{hensman-2010,shastri-2003,state-2004}
+
+
+\begin{figure}[t]
+\includegraphics[width=0.96\textwidth]{chapters/sriLanka/election-1999}
+\caption[Invalidation plot for the 1999 presidential election]{A plot of the invalidation rate against the support for the government candidate in the 1999 election. The dots represent the electoral divisions. The negative slope to the regression curve indicates differential invalidation helped Kumaratunga in the election.}
+\label{fig:sri-elx1999}
+\end{figure}
+
+A similar analysis produced the following abbreviated output
+
+\begin{codeout}
+Coefficients:
+              Estimate Std. Error z value Pr(>|z|)
+px             -1.0733     0.2837  -3.784 0.000154 ***
+\end{codeout}
+
+\noindent
+and
+
+\begin{codeout}
+                  2.5 %    97.5 %
+px            -1.629266 -0.5173614
+\end{codeout}
+
+\noindent
+This output shows that there is significant evidence of differential invalidation in this election, too. On average, for every 10-percentage point increase in support for Kumaratunga, the invalidation rate drops by approximately 10\% ($=1-e^{-1.0733 \times 0.10}$). Figure~\ref{fig:sri-elx1999} illustrates this effect.
+
+Again, there is strong evidence of unfairness in this election, and that unfairness helped the government candidate. Again, since the northern electoral divisions are not a part of the analysis, this unfairness is over and above any unfairness in the electoral system against the Tamils.
+
+
+
+
+
+
+
+
+%%% ### %%% ### %%% ###
+\subsection{The 2005 Election}
+Parliament underwent some significant changes between the 1999 and 2005 elections. The biggest change was that President Kumaratunga's People's Alliance party lost its majority in the parliament. In fact, from 2001 until 2004, Wickremesinghe's United National Party (UNP) held the majority and the premiership. 
+
+To help ensure that her coalition controlled the parliament, Kumaratunga merged the People's Liberation Front and the People's Alliance to form the United People's Freedom Alliance (UPFA). The move was successful, as the 2004 parliamentary election saw the UPFA win a majority of the seats.\cite{hensman-2010} This placed her party in power in time for the 2005 presidential election.
+
+However, Chandrika Kumaratunga did not run for a third term in 2005. In her stead, Prime Minister Mahinda Rajapaksa ran against Wickremesinghe of the United National Party (UNP). Thus, because his UPFA party controlled the parliament, Mahinda Rajapaksa was the government-supported candidate in the 2005 election.\cite{hensman-2010,uyangoda-2010b}
+
+The analysis of the 2005 presidential election produced this abbreviated output:
+
+\begin{codeout}
+Coefficients:
+              Estimate Std. Error z value Pr(>|z|)
+px            -1.08495    0.14070  -7.711 1.25e-14 ***
+\end{codeout}
+
+\noindent
+and
+
+\begin{codeout}
+                  2.5 %    97.5 %
+px            -1.360718 -0.8091844
+\end{codeout}
+
+\noindent
+These results show significant evidence of differential invalidation in favor of Rajapaksa, the government-supported candidate. Given that there is no differential invalidation, the probability of observing results this extreme are one in $10^{14}$ --- rather rare. Furthermore, for each 10-point increase in support for Rajapaksa, the probability of a ballot being invalidated decreases by an average of 10\%. Figure~\ref{fig:sri-elx2005} illustrates this evidence of unfairness in the 2005 election.
+
+
+\begin{figure}[t]
+\includegraphics[width=0.96\textwidth]{chapters/sriLanka/election-2005}
+\caption[Invalidation plot for the 2005 presidential election]{A plot of the invalidation rate against the support for the government candidate in the 2005 election. The dots represent the electoral divisions. The negative slope to the regression curve indicates differential invalidation helped Rajapaksa in the election.}
+\label{fig:sri-elx2005}
+\end{figure}
+
+
+There are two important things to note about this election beyond the differential invalidation. First, note that the invalidation rate tended to be much lower in this election than in the previous two. This may (or may not) indicate that the 1994 and 1999 elections had inflated invalidation rates arising from Kumaratunga supporters happily invalidating the votes originally destined for her opponents.
+
+Secondly, note that the slope of the regression curve is also much shallower here than in the 1994 and 1999 elections. This, and the previous observation, strongly suggests that this election and the previous two did not follow the same `rules of invalidation.' 
+
+
+
+
+
+
+
+%%% ### %%% ### %%% ###
+\subsection{The 2010 Election}
+The Sri Lankan civil war officially ended in May 2009.\cite{wijaypala-2009} The January 2010 election had President Rajapaksa challenged by Field Marshal Gardihewa Sarath Chandralal Fonseka. While the two worked well together in the closing years of the war, the two disagreed on several issues, including the future of Sinhalese-Tamil relations in Sri Lanka.\cite{hensman-2010,uyangoda-2010}
+
+As no parliamentary elections had been held since 2004, Rajapaksa's United People's Freedom Alliance held the premiership in the name of Ratnasiri Wickremanayake. As such, Rajapaksa is the government-supported candidate. Again, the government-supported candidate won the election. This time, Rajapaksa received 57\% of the ballots counted to Fonseka's 40\%. 
+
+This is of particular note because the international news services who had done some polling thought that the election would be so close that the winner would not be known for some time.\cite{bbc-20100126} Furthermore, while the ballots were being counted, Rajapaksa sent the army to `secure' the Cinnamon Lakeside hotel, in which Fonseka and his advisors were staying.\cite{bbc-20100127} This eventually led to Fonseka's arrest and convictions for irregularities in army procurement and for war crimes.\cite{bbc-20111118}
+
+
+\begin{figure}[t]
+\includegraphics[width=0.96\textwidth]{chapters/sriLanka/election-2010}
+\caption[Invalidation plot for the 2010 presidential election]{A plot of the invalidation rate against the support for the government candidate in the 2010 election. The dots represent the electoral divisions. The negative slope to the regression curve indicates differential invalidation helped Rajapaksa in the election. }
+\label{fig:sri-elx2010}
+\end{figure}
+
+
+Table~\ref{tab:sri-resultsTable} shows that there was significant evidence of differential invalidation. For every 10-point increase in support for Rajapaksa, the invalidation rate in the division decreased by an average of 20\%. Figure~\ref{fig:sri-elx2010} illustrates this evidence of unfairness in the 2010 election.
+
+This election shows the strongest differential invalidation of any being investigated. It is also the election with the gravest results. Election day was particularly violent and Fonseka, the opposition candidate, was arrested just a couple days after the election. This memory weighed heavily on the minds of Sri Lankans as they went to the polls in 2015.
+
+
+
+
+
+
+
+
+
+
+%%% ### %%% ### %%% ###
+\subsection{The 2015 Election}
+The April 2010 elections to the 14th Parliament of Sri Lanka increased Rajapaksa's power in Sri Lanka. His United People's Freedom Alliance (UPFA) held an absolute majority in the Parliament of Sri Lanka. This allowed his UPFA to amend the constitution, increasing the power of the president --- and eliminating term limits.\cite{haviland-2010} Because of the large amount of power his party held, Rajapaksa felt certain he would win re-election. However, alliances changed rather swiftly after Rajapaksa announced the early elections and his desire to be reelected for a third term.
+
+His opponent was Maithripala Sirisena, Rajapaksa's Minister of Health and a former member of Rajapaksa's UPFA coalition. The opposition United National Party (UNP) selected Sirisena as their candidate. Almost immediately, many of Rajapaksa's allies switched to support Sirisena.\cite{tamilnet-2014}
+
+
+\begin{figure}[t]
+\includegraphics[width=0.96\textwidth]{chapters/sriLanka/election-2015}
+\caption[Invalidation plot for the 2015 presidential election]{A plot of the invalidation rate against the support for the government candidate in the 2015 election. The dots represent the electoral divisions. The (slight) negative slope to the regression curve indicates differential invalidation helped Rajapaksa in the election. }
+\label{fig:sri-elx2015}
+\end{figure}
+
+
+Table~\ref{tab:sri-resultsTable} shows slight evidence of differential invalidation ($p=0.0929$). However, when the Tamil-majority districts of Jaffna and Vanni are included, the evidence and the effect size both become much stronger ($p < 0.0001$). Figure~\ref{fig:sri-elx2015} illustrates this evidence. On average, for each 10-point increase for Rajapaksa, the invalidation rate drops by an average of 10\%.
+
+From a statistical standpoint, this is the most interesting of the elections. Without the Tamil regions, there is no real evidence of differential invalidation in favor of Rajapaksa --- perhaps because he lost the election. However, with the inclusion of the Tamil areas, there is evidence. This strongly suggests that the election was biased against the Tamils. Whether this is due to conscious biasing of the counters against the ethnic-minority Tamils \emph{or} due to the electoral rules that hampered the Tamils and their votes from counting, one cannot directly tell. It does help illustrate the invalidation map for the 2015 election, however (Figure~\ref{fig:sriLanka-sri2015pres}). Those areas that supported Rajapaksa were not the Tamil-dominated areas in the north. Similarly, those areas that had higher-than-average invalidation rates \emph{were} those Tamil-dominated areas in the north. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%%% ### %%% ### %%% ###
+\subsection{The 2019 Election}
+
+\begin{figure}[t]
+\includegraphics[width=0.96\textwidth]{chapters/sriLanka/election-2019}
+\caption[Invalidation plot for the 2019 presidential election]{A plot of the invalidation rate against the support for the government candidate in the 2019 election. The dots represent the electoral divisions. The negative slope to the regression curve indicates differential invalidation helped Rajapaksa in the election.}
+\label{fig:sri-elx2019}
+\end{figure}
+
+While the Sri Lankan constitution allowed President Maithripala Sirisena to serve a second term, he announced on the day of his inauguration that he would serve but one term.\cite{sbs-20150110} This left the election without an incumbent. To fill that vacuum, the two major parties selected Sajith Premadasa (UNP) and Gotabaya Rajapaksa (SLPP). Premadasa is the former Deputy Minister of Health (2001--2004 under Kumaratunga) and the son of assassinated former president Ranasinghe Premadasa. Rajapaksa is a former Secretary to the Ministry of Defence and Urban Development (2005--2015 under Rajapaksa) and the brother of former president Mahinda Rajapaksa.
+
+Because of internal power struggles in the previous two main parties, as well as the formation of the Sri Lanka People's Front (SLPP) party out of several SLFP members who supported former president Mahinda Rajapaksa, it is rather difficult to determine who is the ``government-supported'' candidate. However, after a devastating loss in the 2018 local elections, Sirisena's Sri Lankan Freedom Party (SLFP) decided to support the SLPP candidate, Gotabaya Rajapaksa.\cite{newsfirst-2019} This, along with the fact that his brother is a former president and big figure in Sri Lankan politics, arguably makes him the government-supported candidate.
+
+
+
+
+
+Table~\ref{tab:sri-resultsTable} shows strong evidence of differential invalidation ($p < 0.0001$). In fact, when the Tamil-majority districts of Jaffna and Vanni are included, the evidence and the effect size both become \emph{much} stronger. Figure~\ref{fig:sri-elx2019} illustrates this evidence. On average, for each 10-point increase for Rajapaksa, the invalidation rate drops by an average of 6.4\%.
+
+
+
+%%%%% ##### %%%%% ##### %%%%%
+%%% Sri Lankan Map
+\begin{figure}
+\begin{center}
+\includegraphics[width=0.48\textwidth]{chapters/sriLanka/sri2019pres-map-raj}
+\hfill
+\includegraphics[width=0.48\textwidth]{chapters/sriLanka/sri2019pres-map-inv}
+\end{center}
+\caption[Map of 2019 Sri Lankan presidential election results.]{Maps of the 2019 Sri Lankan presidential election results. The left panel is the vote share for Gotabaya Rajapaksa; the right, the invalidation rate.}
+\label{fig:sriLanka-sri2019pres}
+\end{figure}
+%%
+
+
+Finally, note that Figure~\ref{fig:sriLanka-sri2019pres} illustrates the effects of differential invalidation on this election. The left panel shows the support rate for Rajapaksa; the right, the invalidation rate. Rajapaksa received very little support from the Sri Lankan Tamil areas (north and east). Furthermore, he received less-than-average support from the areas with many Indian Tamils (south of center in the map). These Tamil areas also tended to have higher-than-average levels of invalidation.
+
+Is this due to the counters purposely invalidating many votes for Rajapaksa? Is this due to the electoral system being biased against those who do not speak Sinhalese? With this analysis, one cannot tell. However, giving the government the benefit of the doubt suggests that the government should undertake a study to determine if the electoral system is at fault. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%%% ### %%% ### %%% ### %%% ### %%% ### %%% ### %%% ### %%% ### %%% ### %%%%
+\section{Discussion}
+Figure~\ref{fig:sri-elxAll} provides all of the regression curves on one graphic. Note that all slopes are negative. This indicates that divisions supporting the government-supported candidates tended to also have a lower proportion of their votes declared invalid. This is consistent with systematic differential invalidation: the ``rules'' for invalidation seem to differ between those votes in favor of the government candidate and those against. If the rules were the same, then the slope (candidate support effect) would be near zero.
+
+\begin{figure}[t]
+\includegraphics[width=0.96\textwidth]{chapters/sriLanka/election-all}
+\caption[Invalidation curves for all six elections]{A plot of the six regression curves. Note that all six have a negative slope, indicating differential invalidation that helped the government-supported candidate in each and every election. The probability of all six helping the government-supported candidate by accident is infinitesimal.}
+\label{fig:sri-elxAll}
+\end{figure}
+
+The fact that the slope is negative in \emph{all of the elections} is very striking. Were there no inherent bias toward the government-supported candidate, then we would expect some slopes to be positive and some to be negative. Here, \emph{all} are negative. This is extremely strong evidence either of a problem with the electoral laws/system or with how the votes are counted.\footnote{Actually, this could also be evidence of persistent ballot-box stuffing (see footnote on page~\pageref{fn:reg-ballotboxstuffing}). However, it is rather difficult to explain how ballot boxes were stuffed for 25 years without some direct evidence in the form of photographs or testimony.}
+
+While the regression slopes are all negative, indicating unfairness in the elections in favor of the government-supported candidate, the 2015 election shows the least evidence of differential invalidation. This may be due to a few reasons. First, the ``government-supported'' candidate lost a lot of government support in the days before the election. There was a relatively large exodus of UPFA members to the opposition bloc. \cite{tamilnet-2014} Thus, Rajapaksa may not have been as government-supported as one would expect.
+
+Second, the differential invalidation may have been mitigated by the fact that the government candidate lost. That is, while differential invalidation did exist in the election, its effect were lessened by the fact Rajapaksa-supporters did not control most divisions.
+
+Third, it is interesting that whether or not the two Tamil-majority districts are included largely determines our conclusion in this election. When they are included, the differential invalidation becomes highly significant ($p < 0.0001$). Since these two districts supported challenger Sirisena (Jaffna 74\% to 22\% and Vanni 78\% to 19\%), this means the Jaffna and Vanni districts experienced higher-than-expected invalidation.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%%% ### %%% ### %%% ### %%% ### %%% ### %%% ### %%% ### %%% ### %%% ### %%%%
+\section{Conclusion}
+Researchers frequently define ``free and fair'' democratic elections. While the definitions tend to vary on the finer points, they agree that fair democratic elections require that the probability of a person's ballot counting must be independent of whom the vote was cast for. When there is a relationship between the invalidation rate and the support rate for the candidate, the election exhibits differential invalidation, which is a result of one type of unfairness. Testing for this relationship is as easy as using regression --- albeit one that takes into consideration the discrete nature of the dependent variable, as well as its inherent heteroskedasticity and overdispersion. If a relationship is detected, then there is significant evidence of unfairness in the election.
+
+This research examined the six Sri Lankan presidential elections from 1994 to 2019 for evidence of persistent unfairness. In each of the elections, significant differential invalidation is evident. This suggests changes need to be made to the electoral structure in Sri Lanka to help ensure free and fair democratic elections.
+
+Sirisena made some changes to the system in 2015. The Sri Lankan Department of Elections oversaw elections from 1955 until it was replaced by the Election Commission of Sri Lanka on November 17, 2015 --- after the 2015 Presidential election.\cite{electioncommission-2018b} This change seems to have not resulted in eliminating the differential invalidation; the 2019 election also showed that the government-supported candidate benefited from it. 
+
+Note that the slope of the 2019 election is rather small. Thus, it may be that the changes wrought by the Election Commission of Sri Lanka are there; they just did not appear in that particular election. Further election may show the differential invalidation going against the government-supported candidate. It may even show a lack of differential invalidation. If either of these scenarios comes to pass, then we will have evidence that the Election Commission has succeeded in making Sri Lankan elections more free and fair.
+
+Until then, we can only hope.
+
+
+
+
+
+
+
+
+
+
+%%% End of File

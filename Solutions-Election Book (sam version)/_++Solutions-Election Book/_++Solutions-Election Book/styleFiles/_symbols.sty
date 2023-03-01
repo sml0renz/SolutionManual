@@ -1,0 +1,161 @@
+%% ----------------------------------------------------------------
+%%
+%%    Frequently used symbols
+%%    	written by Ole J. Forsberg
+%%
+%% ----------------------------------------------------------------
+
+
+
+
+
+\newcommand{\degree}{\ensuremath{^\circ}}              % The degree symbol
+\newcommand{\ensuretext}[1]{\ensuremath{\text{#1}}}
+
+
+%% ---------------------------------------------------------------- math definitions
+
+\newcommand{\norm}[1]{\left\Vert\ #1\ \right\Vert}     % Norm
+\newcommand{\abs}[1]{\left\vert\ #1\ \right\vert}      % Absolute value
+\newcommand{\set}[1]{\big\{#1\big\}}                   % Set notation
+\newcommand{\given}{\ \vert \ }                        % given
+\newcommand{\Given}{\ \Big\vert \ }                    % Given
+
+\newcommand{\caret}{ \textsuperscript{$\wedge$} }                    % Caret
+
+
+\newcommand{\eps}{\varepsilon}                         % Varepsilon
+\newcommand{\To}{\rightarrow}                          % The 'to' rightarrow
+\newcommand{\E}[1]{\ \mathbb{E}\! \left[\ #1{^{\phantom{!}}} \right]}        % Expected Value [ ]
+\newcommand{\V}[1]{\ \mathbb{V}\! \left[\ #1^{\phantom{!}} \right]}        % Variance [ ]
+\newcommand{\MSE}[1]{\text{MSE} \left[\ #1^{\phantom{!}} \right]}     % MSE [ ]
+\newcommand{\bias}[1]{\ \text{bias}\! \left[\ #1^{\phantom{!}} \right]}   % bias
+\newcommand{\Cov}[1]{\mathbb Cov \left[ #1 \right]}
+\newcommand{\Cor}[1]{\mathbb Cor \left[ #1 \right]}
+\newcommand{\PR}[1]{\mathbb{P}\! \left[\ #1^{\phantom{!}} \right]}    % Probability [ ]
+\newcommand{\oldSigma}{\ensuremath{\pmb{\Sigma\!\!\!_{/}}}}
+
+\newcommand{\defeq}{:=}                                % Defined in equality
+\newcommand{\seteq}{\, \stackrel{\text{set}}{=} \, }   % Set equal
+
+\newcommand{\likely}{\mathcal{L}}                      % Likelihood
+\newcommand{\lnlikely}{l}                              % Log-likelihood
+
+\newcommand{\Xbar}{\overline{X}}                       % X-bar
+\newcommand{\xbar}{\overline{x}}                       % x-bar
+\newcommand{\Ybar}{\overline{Y}}                       % Y-bar
+\newcommand{\ybar}{\overline{y}}                       % y-bar
+\newcommand{\Zbar}{\overline{Z}}                       % Z-bar
+\newcommand{\zbar}{\overline{z}}                       % z-bar
+
+%\newcommand{\Xtilde}{\widetilde{X}}                    % X-tilde
+%\newcommand{\xtilde}{\widetilde{x}}                    % x-tilde
+%\newcommand{\Ytilde}{\widetilde{Y}}                    % Y-tilde
+%\newcommand{\ytilde}{\widetilde{y}}                    % y-tilde
+
+%\newcommand{\rsquare}{R^2}                             % R-squared
+%\newcommand{\rbarsquare}{\overline{R}^2}                    % Adjusted R-squared
+
+\newcommand{\floor}[1]{\lfloor #1 \rfloor}             % Floor
+%\newcommand{\ceil}[1]{\lceil #1 \rceil}                % Ceiling
+
+
+\newcommand{\1}[1]{ \, \mathbb{I}_{\left\{ #1 \right\}} \, }               % Indicator function
+%\newcommand{\inlaw}{\, \stackrel{\mathcal{L}}{\rightarrow} \, }  % Converges in law
+%\newcommand{\prob}{\, \stackrel{P}{\rightarrow} \, }         % Converges in probability
+\newcommand{\indist}{\, \stackrel{d}{\rightarrow} \, }         % Converges in distribution
+
+%\renewcommand{\lg}{\log_2}                             % Log base 2
+\newcommand{\half}{\frac{1}{2}}                        % One-half
+\newcommand{\third}{\frac{1}{3}}                       % One-third
+\newcommand{\quarter}{\frac{1}{4}}                     % One-quarter
+
+%\newcommand{\dx}{\ \mathrm{d}x}                        % integral dx
+%\newcommand{\dy}{\ \mathrm{d}y}                        % integral dy
+%\newcommand{\dt}{\ \mathrm{d}t}                        % integral dt
+
+\newcommand{\D}[1]{\ \mathrm{d}#1}                     % integral d--
+
+%\newcommand{\M}{\mathcal{M}}                           % Metric space
+
+\newcommand{\mat}[1]{\ensuremath{\mathbf{#1}}}         % Matrix
+\renewcommand{\vec}[1]{\mathbf{#1}}                   % Vector
+%\newcommand{\trace}{\ensuretext{tr\ }}                 % Trace
+
+
+%%                                                               %% New maths functions
+\DeclareMathOperator{\logit}{logit}
+%\DeclareMathOperator{\logistic}{logistic}
+%\DeclareMathOperator{\loglog}{loglog}
+%\DeclareMathOperator{\cloglog}{cloglog}
+\DeclareMathOperator{\argmax}{argmax}
+\DeclareMathOperator{\argmin}{argmin}
+%\DeclareMathOperator{\acos}{acos}
+
+%\DeclareMathOperator{\rank}{rank}
+
+
+
+
+
+
+%%                                                               %% Number sets
+%\newcommand{\Reals}{\mathbb R}                         % The reals
+%\newcommand{\Integers}{\mathbb Z}                      % The integers
+\newcommand{\Nats}{\mathbb N}                      % The naturals
+%\newcommand{\Rationals}{\mathbb Q}                     % The rationals
+
+
+
+
+%%                                                               %% Distributions
+
+%\newcommand{\Bernoulli}{\text{BERN}}                   % Bernoulli
+\newcommand{\Binomial}{\text{BINOM}}                   % Binomial
+%\newcommand{\Multinomial}{\mathcal{M}\text{ultinom}}   % Multinomial
+%\newcommand{\Geometric}{\mathcal{G}\text{eom}}         % Geometric
+%\newcommand{\Hypergeometric}{\mathcal{H}}              % Hypergeometric
+%\newcommand{\NegBin}{NegBin}                           % Negative Binomial
+%\newcommand{\Poisson}{\mathcal{P}}                     % Poisson
+\newcommand{\Benford}{\text{BENF}}                      % Benford
+
+\newcommand{\Exponential}{\text{EXP}}                  % Exponential
+\newcommand{\GAMMA}{\text{GAM}}                        % Gamma
+\newcommand{\Normal}{\text{NORM}}                      % Normal
+\newcommand{\Uniform}{\text{UNIF}}                     % Uniform
+\newcommand{\Beta}{\text{BETA}}                        % Beta
+\newcommand{\Loguniform}{\text{Log-}\Uniform}          % Log-Uniform
+%\newcommand{\Logitnormal}{\mathcal{L}\text{ogit}\Normal}          % Logit-Normal
+
+
+
+\newcommand{\dist}{\sim \, }                           % dist
+\newcommand{\iid}{\stackrel{\text{iid}}{\sim} \, }     % dist iid
+\newcommand{\ind}{\stackrel{\text{ind}}{\sim} \, }     % dist independently
+%\newcommand{\ndist}{\nsim \, }                         % not dist
+%\newcommand{\adist}{\stackrel{\cdot}{\thicksim} \, }   % approximately distributed as
+
+
+
+
+
+
+
+%%                                                     %% R parts
+\newcommand{\R}{\texttt R}                                 % The R letter
+\newcommand{\var}[1]{\textcolor{varColor}{\texttt{#1}}}    % Variable names
+%\newcommand{\data}[1]{\textcolor{dataColor}{\texttt{#1}}}  % Dataset names
+%\newcommand{\package}[1]{\textcolor{packageColor}{\small{\texttt{#1}}}}    % Packages
+%\newcommand{\function}[1]{\textcolor{black}{\small{\texttt{#1}}}}          % Function
+%\newcommand{\rcom}[1]{\ensuretext{\textcolor{commandColor}{\small{\texttt{#1}}}}} % Commands
+%%
+
+
+
+
+%\newcommand{\asterism}{\begin{center}* * *\end{center}}
+
+
+
+
+%%% === %%% === %%% === %%% === %%% === %%%

@@ -1,0 +1,156 @@
+\chapter{Polling 101}\label{ch:polling101}
+
+%%% === --- === --- === --- === %%%
+%%%%%
+\subsection*{Review}
+\begin{enumerate}
+
+  \item Why is the Agresti-Coull estimator not often used in polling analysis?
+\begin{solution}
+This question gets at the inherent tension between the value of a biased estimator and that of a precise estimator. The Agresti-Coull estimator is biased, but has greater precision than the usual sample proportion estimator. Thus, to a statistician, it is the better estimator.
+
+However, it is rather difficult to make the case to use a biased estimator when an unbiased one is easily calculated. Furthermore, the sample proportion is easily understood, while the Agresti-Coull is not. Finally, unless the sample size is incredibly small (less than 10), the improvement on precision is rather minor. Thus, it is an improvement, but not much of one.
+
+For these reasons, the Agresti-Coull estimator is rarely used.
+\end{solution}
+%
+
+
+  \item How would you convince a person that an estimator with a lower MSE is preferred to one that is unbiased?
+\begin{solution}
+Great question. I have yet to find a way of doing this successfully. The closest I've come is to emphasize the precision and the likelihood of being closer to the right answer (with the lower MSE estimator) rather than being right ``on average.'' The ``on average'' requires performing the experiment many times in order to reap the benefit.
+\end{solution}
+%
+
+
+  \item What are the main differences between a confidence interval and a credible interval? When should you use each?
+\begin{solution}
+The main difference is that a credible interval is based on probabilities. That is, one can state ``the probability of $\pi$ being in the interval is 95\%.'' For a confidence interval, such a statement is not true. All that can be said is ``95\% of the time, $\pi$ is in the interval.'' We don't know if this is one of those 95\% or one of the 5\%.
+
+I advocate using credible intervals at all times, because it provides more information. However, some hold that Bayesian analysis is inherently weak because it bases itself on an assumption about the distribution of $\pi$.
+\end{solution}
+%
+
+
+  \item List several advantages and disadvantages to Bayesian analysis.
+\begin{solution}
+Bayesian analysis provides a way of incorporating prior information (or lack thereof) in the analysis. With that prior information, and the additional information from the collected data, one is able to calculate the distribution of the population parameter (or of its uncertainty).
+
+The main drawback is that the results are based on the assumption that the prior distribution is correct. If the prior is wrong, then the posterior distribution is wrong. 
+
+However, I do not see this as a weakness. Frequentist analysis also makes an assumption about the distribution of the parameter. It just is not as explicit about it.
+\end{solution}
+%
+
+
+  \item Why is the conservative margin of error approximately $1/\sqrt{n}$?
+\begin{solution}
+The conservative margin of error is based on assuming the population parameter is $\pi=0.500$. Using this as the estimate of $\pi$ produces the widest confidence intervals.
+\end{solution}
+%
+
+
+  \item What does the thick line at the bottom of Figure~1.2, page~12, represent?
+\begin{solution}
+This line represents the 95\% confidence interval. A total of 95\% of the binomial distribution occurs within that interval (47 to 53\%).
+\end{solution}
+%
+
+
+  \item Why is the beta distribution called the ``conjugate prior'' for the binomial distribution?
+\begin{solution}
+The beta distribution is the conjugate prior to the binomial distribution because if we make the prior distribution a beta, then the posterior distribution will also be a beta.
+\end{solution}
+%
+
+
+  \item What is ``coverage,'' and how can a biased estimator have actual coverage closer to the claimed coverage than an unbiased estimator? Do all biased estimators have better coverage than unbiased estimators?
+\begin{solution}
+Coverage is the proportion of the time that the confidence interval will contain (or cover) the parameter (see Figure~1.6 for an illustration).
+
+While a part of the confidence interval, the parameter estimator is not the whole story. The endpoints contain both the estimator \emph{and} the standard error (standard deviation of the sampling distribution). Thus, the unbiased estimator may have a standard error that is much greater than ``it should be,'' which causes the coverage to be much higher than 95\%.
+
+No, not all biased estimators have better coverage. However, it does open a new field of study in trying to determine correct confidence intervals, even if the estimator is biased.
+\end{solution}
+%
+
+
+\end{enumerate}
+
+
+
+
+
+
+
+
+\subsection*{Conceptual Extensions}
+\begin{enumerate}
+
+ \item There were four counties (local authorities) in which the 2014 Scottish independence referendum received more than 50\% of the votes cast (Figure~1.1). What do they have in common?
+\begin{solution}
+I don't know. Some ideas would include that they are all urban areas, that they had the same economic base, that the English avoided those areas. In reality, there may be nothing connecting these four counties beyond how they voted. 
+\end{solution}
+%
+
+
+ \item The turnout for the 2014 Scottish independence referendum was not 100\%. Assuming that those who did not vote in each county were similar to those who did, would a higher turnout have helped independence or not?
+\begin{solution}
+All four of the counties that voted in favor of independence had lower-than-average turnout. So, increasing their turnout would help Scottish independence. However, there would need to be an increase in over 250 thousand votes in these four counties. Now, consider that increasing the turnout in the other counties would make it harder for independence to pass. Thus, increasing turnout would not help.
+
+Given that we have the actual numbers, we see that increasing the turnout to 100\% across Scotland, while keeping the same support level would result in 1,922,398 in favor and 2,361,687 against independence. This is 44.9\% in favor\ldots\ not much of a shift in voting results.
+
+\end{solution}
+%
+
+
+
+ \item The Survation poll estimated independence support to be 47\%, which was 2.3\% too high. Was this poll ``too far off''? This question gets at your understanding of the confidence interval.
+\begin{solution}
+Meep.
+\end{solution}
+
+  \item In the beta distribution, one can think of $a+b$ as the effective sample size, $n$. With this, explain why $\E{Y} = \frac{a}{a+b}$ makes sense. Also, compare the variance of a beta distribution with that of the sample proportion, $\frac{\pi(1-\pi)}{n}$.
+
+  \item Using words, answer these two questions: 
+  \begin{enumerate}[a) ]
+   \item How do we know that the binomial distribution is equivalent to the hypergeometric distribution when $n=1$? 
+   \item How do we know that the binomial distribution is equivalent to the hypergeometric distribution when $N=\infty$?
+  \end{enumerate}
+  
+  \item Using mathematical proofs, answer these two questions: 
+  \begin{enumerate}[a) ]
+   \item How do we know that the binomial distribution is equivalent to the hypergeometric distribution when $n=1$? 
+   \item How do we know that the binomial distribution is equivalent to the hypergeometric distribution when $N=\infty$?
+  \end{enumerate}
+  
+
+\end{enumerate}
+
+
+
+
+
+
+
+
+\subsection*{Computational Extensions}
+\begin{enumerate}
+  \item Using Defn.~1.3, prove $\MSE{P} = \text{bias}^2[P] + \V{P}$.
+  \item Repeat all of the Survation calculations for this chapter for a poll in which $256$ out of $500$ people supported Scottish independence. Do the conceptual conclusions significantly differ?
+  \item In several places, we focused exclusively on the kernel of the distribution and completely ignored the normalizing constants. Why can we do that? Are distributions \emph{uniquely} determined by their kernel?
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+
+%% End of file

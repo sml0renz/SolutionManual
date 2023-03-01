@@ -1,0 +1,232 @@
+\chapter{Polling 399}\label{ch:polling399}
+
+
+%%% ### %%% ### %%% ### %%% ### %%% ### %%% ### %%% ### %%% ### %%% ### %%% ### %%%
+
+
+\subsection*{Review}
+\begin{enumerate}
+
+ \item What information is needed to properly use stratified sampling?
+\begin{solution}
+In order to conduct stratified sampling, we will need the point estimate, $P = \frac{X}{n}$, the proper weight (especially important for an unbiased estimate), and the stratified estimate we saw on page 38. 
+\end{solution}
+
+ \item How would you convince a person that an estimator with a lower MSE is preferred to one that is unbiased?
+\begin{solution}
+Unbiased estimators are incredibly unrealistic in real life applications, so typically if you have a really greate estimator with a low MSE compared to an ubiased estimator that has a potential to have a large MSE or be tailored to being unbiased, you will want to take the estimator that gets you closest to reality. In other words, unbias is great, but a lot of times, biases can give insight to the data. MSE is important because we can actually see how far off our model is from reality, which is crucial regardless of bias.
+\end{solution}
+
+ \item What is the source of bias in the stratified estimator?
+\begin{solution}
+The source of bias in a stratified estimator is when $w_{g} \neq \frac{N_{g}}{N}$. In other words, when the weights are incorrect, then the estimator will be biased.
+\end{solution}
+
+ \item What proportion of the US population agrees with the statement ``Women should be treated the same as men in the military''?
+\begin{solution}
+The population support is equal to 50\%.
+\end{solution}
+
+ \item What was it about the gender variable that made it desirable as the grouping variable?
+\begin{solution}
+Usually, the estimate will naturally bias towards the gender that has the largest weight, so grouping it to essentially smooth things out will beneficial.
+\end{solution}
+
+ \item What were some important conclusions from the stratified sampling experiments (pages~\pageref{exp:polling399-srs}--\pageref{exp:polling399-st4})?
+\begin{solution}
+In my opinion, some of the most important conclusions are what happens in the case of a biased and unbiased estimator, and what happens if our weights are very close to being perfect versus incredibly off from what they should be. This tells us how models using stratified sampling actually behave and how we can come to conclusions in the real world.
+\end{solution}
+
+ \item What was it about the first stratified sampling experiment (page~\pageref{exp:polling399-srs}) that produced results identical to the simple random sampling experiment?
+\begin{solution}
+The support of the candidate was constant ($\pi_{i}$), so there was no advantage to using stratified over simple random. This tells us that when we need to do grouping or work with weights, we will typically prefer one to the other (usually determined by what is needed and the MSE).
+\end{solution}
+
+ \item In the formula for the stratified confidence interval, where did the term under the square root sign come from?
+\begin{solution}
+That is our standard error for stratified sampling, where the $w_{g}^{2}$ term is the weight for the group of interest, the $\hat{\pi_{g}} (1 - \hat{\pi_{g}})$ is the estimator for the group, and $n_{g}$ is the sample size for that particular group. 
+\end{solution}
+
+\end{enumerate}
+
+
+
+
+\subsection*{Conceptual Extensions}
+\begin{enumerate}
+
+ \item What is it about the ``Democratic Support'' map (Figure~\ref{fig:polling399-usa2016pres}) that suggests polling should also take state into consideration? Why is state usually not taken into consideration in national polls?
+\begin{solution}
+The outcome of the states in the 2016 election was in favor of Clinton, and the map represents this because most large states have a high democratic support, with a reasonable amount of others in between. Therefore, the state should be taken into account because the majority was Clinton, but Trump still won. 
+\end{solution}
+
+ \item In lieu of stratifying on the state, one could stratify on the region. Break the country into six good strata based on the state. Why is your stratification the best?
+\begin{solution}
+There are many answers for this, but I would break it up into the West, the South, the North, the mid-West, South-East, and East. This is the best because it is pretty even across the map and targets the six main sections of the United States. There could be a lot of important relationships that lie withiin these sections, so I believe this grouping is appropriate. 
+\end{solution}
+
+ \item Why is the mean squared error stratified estimator the same as that for the simple random sample estimator in the example on page~\pageref{exp:polling399-st1}?
+\begin{solution}
+The MSE is the same due to the consistency in the stratified estimator. Because there is no variability in weights or in proportions, there is no change from simple random sampling, so it will be the same.
+\end{solution}
+ 
+ \item Why is the margin of error for the simple random sample estimator ($1/\sqrt{n} = 0.0316$) smaller than that of the stratified estimator in the example of Section~\ref{sec:polling399-confint}, page~\pageref{exp:polling101-confint-1}?
+\begin{solution}
+It could be smaller because we are not concerned with as many variables as we are when we do stratified sampling. For example, we have the weight and the difference in estimator to be concerned with, so, in most cases, it makes for a more accurate estimator, even if it is a little higher. Another practical way to think about this is as the complexity of sampling and polling increases, there is more room for error (especially in the case of real-life exmaples). It is important to know smaller error does not always mean best, especially when we are maximizing information learned.
+\end{solution}
+
+\end{enumerate}
+
+
+
+
+\subsection*{Computational Extensions}
+\begin{enumerate}
+
+ \item Derive the formula for the confidence interval, Eqn.~\ref{eq:polling399-confint}.
+\begin{solution}
+We know that the formula for a confidence interval is defined as: 
+
+$lower bound = point \: estimate - Z_{\alpha/2} standard \: error$
+
+$upper bound = point \: estimate + Z_{\alpha/2} standard \: error$
+
+Recall when we are working with stratified sampling, the point estimate is defined as:
+
+$ \sum_{g = 1}^{G} w_{g} \bar{X}_{g}$
+
+Which is the sum of the weights multiplied by the stratified sampling estimator. Our $Z_{\alpha/2}$ will depend on what level of confidence we are testing at. The typical level of confidence is 95\%, so $Z_{\alpha/2} = 1.96$. The standard error is just the square root of the mean-squared error, so:
+
+$\sqrt{\sum_{g = 1}^{G} w^{2}_{g} \frac{\hat{\pi} (1 - \hat{\pi})}{n_{g}}}$
+
+Putting all we know about stratified sampling, we get: 
+
+$ endpoints = \sum_{g = 1}^{G} w_{g} \bar{X}_{g} \pm Z_{\alpha/2}  \sqrt{\sum_{g = 1}^{G} w^{2}_{g} \frac{\hat{\pi} (1 - \hat{\pi})}{n_{g}}}$
+\end{solution}
+
+ \item Determine if the simple random sample estimator has a smaller MSE than the stratified estimator under these conditions: Five strata with support $\pi_g = \set{0.50, 0.30, 0.20, 0.90, 0.60}$. The five groups are equally represented in the population and in your sample of 6000.
+\begin{solution}
+Below is the R code for this problem:
+\begin{codein}
+###I will set the seed so you get the same results as me
+set.seed(737157)
+###Stratified sample
+##Population information
+
+pi = c(0.50, 0.30, 0.20, 0.90, 0.60) ##Real subpopulation support
+pg = c(1/5, 1/5, 1/5, 1/5, 1/5) ##Real population weights
+p = sum(pi*pg) ##Total population support
+
+##Sample info
+
+ng = c(6000, 6000, 6000, 6000, 6000) ##Sub-sample sizes
+wg = c(1/5, 1/5, 1/5, 1/5, 1/5) ##Claimed weights
+
+##Generating our polls
+
+x1 = rbinom(1e6, size=ng[1], prob=pi[1])
+x2 = rbinom(1e6, size=ng[2], prob=pi[2])
+x3 = rbinom(1e6, size=ng[3], prob=pi[3])
+x4 = rbinom(1e6, size=ng[4], prob=pi[4])
+x5 = rbinom(1e6, size=ng[5], prob=pi[5])
+
+##Calculating thestratified estimator 
+estStS = wg[1]*x1/ng[1] + wg[2]*x2/ng[2] + wg[3]*x3/ng[3] + wg[4]*x4/ng[4] + wg[5]*x4/ng[5]
+
+##Finally MSE
+
+mean( (estStS-p)^2 ) ##We get an answer of 0.0036
+
+#####Simple random sample
+p = 0.50 ; n = 6000
+
+x = rbinom(1e6, size=n, prob=p)
+estSRS = x/n
+mean( (estSRS-p)^2 ) ### We get an answer of 4.166e-5
+\end{codein}
+Make sure you carefully read the code and make sure you know what it does. We see that the simple random sample estimator has a smaller error than the stratified. 
+\end{solution}
+
+ \item Determine if the simple random sample estimator has a smaller MSE than the stratified estimator under these conditions: Six strata with support $\pi_g = \set{0.50, 0.30, 0.20, 0.90, 0.40, 0.70}$. The six groups are equally represented in the population and in your sample of 6000.
+\begin{solution}
+Below is the code I used for this problem. 
+\begin{codein}
+###I will set the seed so you get the same results as me
+set.seed(737157)
+###Stratified sample
+##Population information
+
+pi = c(0.50, 0.30, 0.20, 0.90, 0.40, 0.70) ##Real subpopulation support
+pg = c(1/6, 1/6, 1/6, 1/6, 1/6, 1/6) ##Real population weights
+p = sum(pi*pg) ##Total population support
+
+##Sample info
+
+ng = c(6000, 6000, 6000, 6000, 6000, 6000) ##Sub-sample sizes
+wg = c(1/6, 1/6, 1/6, 1/6, 1/6, 1/6) ##Claimed weights
+
+##Generating our polls
+
+x1 = rbinom(1e6, size=ng[1], prob=pi[1])
+x2 = rbinom(1e6, size=ng[2], prob=pi[2])
+x3 = rbinom(1e6, size=ng[3], prob=pi[3])
+x4 = rbinom(1e6, size=ng[4], prob=pi[4])
+x5 = rbinom(1e6, size=ng[5], prob=pi[5])
+x6 = rbinom(1e6, size=ng[6], prob=pi[6])
+
+##Calculating thestratified estimator 
+estStS = wg[1]*x1/ng[1] + wg[2]*x2/ng[2] + wg[3]*x3/ng[3] + wg[4]*x4/ng[4] + wg[5]*x4/ng[5] + wg[6]*x4/ng[6]
+
+##Finally MSE
+
+mean( (estStS-p)^2 ) ##We get an answer of 0.0136
+
+#####Simple random sample
+p = 0.50 ; n = 6000
+
+x = rbinom(1e6, size=n, prob=p)
+estSRS = x/n
+mean( (estSRS-p)^2 ) ### We get an answer of 4.166e-5
+\end{codein}
+Make sure to read over it carefully. The simple random sample estimator has a smaller MSE than the stratified.
+\end{solution}
+
+ \item Using the Table~\ref{tab:polling399-monmouthExample} gender information for the actual voting results, estimate a 95\% confidence interval for Clinton's support in the general population.
+\begin{solution}
+Using the gender information, we will find the estimated Clinton support for the general population is:
+
+$ (0.53) (0.53) + (0.47) (0.47) = 50.18\%$
+
+With the margin of error:
+$ 1.96 \sqrt{0.53^{2} \frac{0.5 (1 - 0.50)}{410} + 0.47^{2} \frac{0.50 (1 - 0.50)}{392}} = \pm 3.5\%$
+\end{solution}
+
+ \item Using the Table~\ref{tab:polling399-monmouthExample} party affiliation information for the actual voting results, estimate a 95\% confidence interval for Clinton's support in the general population.
+\begin{solution}
+Using the party information, we will find the estimated Clinton support for the general population is:
+
+$ (0.37) (0.34) + (0.31) (0.38) +   (0.28) (0.33) = 34\%$
+
+With the margin of error:
+$ 1.96 \sqrt{0.34^{2} \frac{0.5 (1 - 0.50)}{267} + 0.38^{2} \frac{0.50 (1 - 0.50)}{298} + 0.28^{2} \frac{0.50 (1 - 0.50)}{231}} = \pm 3.5\%$
+\end{solution}
+
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%%% End of File

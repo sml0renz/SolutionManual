@@ -1,0 +1,294 @@
+\chapter{In-Depth Analysis: Brexit 2016}\label{ch:brexit}
+
+
+
+%%% === %%% === %%% === %%% === %%% === %%% === %%% === %%% === %%% === %%%
+\begin{extract}
+The past few chapters have presented a lot of polling information. This chapter applies it all to a single referendum: The 2016 Brexit vote. This chapter raises a lot of questions --- some of which are undecided in polling. However, it should give you a taste of what poll analysts do to produce their estimates.
+\end{extract}
+
+
+
+
+
+
+
+
+
+
+
+%%% === %%% === %%% === %%% === %%% === %%% === %%% === %%% === %%% === %%%
+\section*{The Brexit Vote}
+Strictly speaking, the European Union (EU) came into being with the ratification of the Maastricht Treaty of 1993.\index{European Union} However, the beginning of the EU goes at least as far back as the 1951 Treaty of Paris, which created the European Coal and Steel Community (ECSC). This union regulated the industrial production of the six signatories with an intent to reduce the probability of a war within Europe, specifically between France and Germany. In addition to the ECSC, the Treaty of Rome (1957) created the European Economic Community (EEC), which united the economies of the signatories even further. The goal of this was to integrate the economies of Europe, thus creating a common market and greater wealth in Europe.
+
+In 1961, the United Kingdom applied to join the EEC.\index{United Kingdom} However, French President Charles de Gaulle blocked British entrance in an effort to reduce American influence. When Pompidou succeeded de Gaulle as French President, the British began their application anew. Finally, on January 1, 1973, the United Kingdom joined the EEC. 
+
+However, when the European Union was formed in 1993, it consisted of more than just the European Economic Community. The three pillars of the EU also included the Common Foreign and Security Policy (taking care of foreign policy and military matters) and the Police and Judicial Co-operation in Criminal Matters (taking care of domestic criminal matters). Thus, while Britain did hold a referendum on remaining in the EEC (in 1975), it never held a referendum for joining the European Union. 
+
+Since 1993, various factions of various British parties have pushed for the United Kingdom to remove itself from the EU. Arguably, the most vocal Euroskeptic party was the UK Independence Party, which formed in 1991, changed its name in 1993, and increased its vote share in Parliament in each election until after the Brexit vote in 2016.\index{Brexit} Its vote share of 12.6\% in 2015 even ensured that it was a member of the opposition. However, the success of UKIP was more a matter of the rising Euroskeptic tide in Britain. According to Curtice, support for Britain leaving the EU trended upwards from 1993 onwards, from 38\% in 1993 to 65\% in 2015, culminating in the Brexit Referendum of 2016.\cite{tarran-2016} 
+
+
+On June 9, 2015, the House of Commons voted 544-53 in favor of holding a non-binding referendum on whether the United Kingdom should remain in the European Union. The vote, which was held on June 23, 2016, asked:
+\begin{quote}
+Should the United Kingdom remain a member of the European Union or leave the European Union?
+\end{quote}
+
+\noindent
+with the vote options being either ``Remain a member of the European Union'' or ``Leave the European Union.''
+
+
+%%%%% ##### %%%%% ##### %%%%%
+%%% Brexit Map (by country)
+\begin{figure}\centering
+\includegraphics[width=0.48\textwidth]{chapters/brexit/gbr2016brexit-map-yes}
+\caption[Map of 2016 Brexit results by country]{Map of the Brexit support in each of the United Kingdom's four constituent countries. The overseas territory of Gibraltar is included in England. The data are from \cite{gbr2016countries}.}
+\label{fig:brexit-gbr2016brexit}
+\end{figure}
+%%
+
+Throughout the year-long election season, the opinion polls rarely showed the ``Leave'' position ahead. However, on June 23, the voters supported the Brexit position by a vote of $51.89\%$ to $48.11\%$. As Figure~\ref{fig:brexit-gbr2016brexit} suggests, the support for Brexit tended to be in England and Wales. Scotland and Northern Ireland tended to support Britain's continued existence within the European Union (as did the overseas territory of Gibraltar).
+
+
+
+Beyond the economic and social shock waves, this was ``yet another'' miss for polls. Many more began to wonder if opinion polls were as valuable as they once seemed. And so, for this chapter, we will closely examine the 2016 Brexit Referendum in the United Kingdom, using it to illustrate the techniques of the past few chapters, as well as to teach us some lessons about polling --- especially about stratified sampling.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%%% ### %%% ### %%% ### %%% ### %%% ### %%% ### %%% ### %%% ### %%% ### %%% ### %%%
+
+
+
+
+
+
+
+
+
+
+%%% === %%% === %%% === %%% === %%% === %%% === %%% === %%% === %%% === %%%
+\section{Knowing Your Data}
+The first step in any analysis is to get to know your data. Figure~\ref{fig:brexit-pollsAll} shows the results of all polls in the data set, along with a smooth curve designed to show trends. Note that from early April onward, support for Brexit increased a bit in the polls, but plunged in the last couple days. Was this plunge real or an artifact of the way in which the polls were taken?
+
+\begin{figure}\centering
+ \includegraphics[width=0.98\textwidth]{chapters/brexit/pollsAll}
+ \caption[All Brexit-2016 polls]{A plot of all polls in the data set, with a smoothing curve shown. The actual result for the 2016 Brexit referendum is $51.89\%$ in favor.}
+ \label{fig:brexit-pollsAll}
+\end{figure}
+
+Recall that polls differ in many important aspects. For instance, some polls are online, while others use the telephone. Does this difference matter? Another possibly important difference is in who is kept in the sample. Should it be all adults, or should the polling firm limit the sample to those who are going to vote in the election? If the latter, how can the polling form determine who will vote?
+
+In general, we would expect both the mode and the sampled population to matter. But, that is just an expectation. Does it seem to matter in this election? 
+
+
+
+
+
+
+
+
+%%% ===
+%%% === %%% === %%% === %%%
+\subsection{Telephone vs. Online}
+The $127$ polls were a mixture of online ($85$) and telephone ($42$) polls. A persistent question concerns whether or not these two modes are unbiased. Figure~\ref{fig:brexit-pollsMode} divides the polls into their two modes and plots smoothing curves for each subset. Note that the telephone polls were much more volatile, especially from early April onward. The online polls were much more stable. While one would expect this to be true for individual polls, since the sample sizes of online polls tends to be much larger than those of telephone polls, it is the polling averages that varied. This hints at a fundamental difference in the sampled populations attracted to each of the two polling modes.\index{polling!mode}
+
+\begin{figure}\centering
+ \includegraphics[width=0.98\textwidth]{chapters/brexit/pollsMode}
+ \caption[Brexit-2016 polls by mode]{A plot of all polls in the data set, separated by mode of contact: online or telephone. The arrow, $\leftarrow$, is the actual result for the 2016 Brexit referendum.}
+ \label{fig:brexit-pollsMode}
+\end{figure}
+
+
+Why might the two sampled populations be different? Was it a matter of the young vs. the old? the females vs. the males? Or, is it something else, something more fundamental? Current thought is that there are two primary sources of error. The first is the quality of online polling. The second is the different populations being sampled. The reality is that online polling, while better than it was a decade ago, is still not as statistically sound as telephone polling.\cite{cohn-2019} However, a separate analysis finds that the bulk of the discrepancy between the two mode is due simply to Internet and phone polls sampling different people.\cite{singh-2016}
+
+Because of this difference, should the online polls be eliminated from consideration? Should the telephone polls carry a higher weight than the online polls? Pew Research studied online polling methods in 2016 and found that their accuracy rates ranged from 66 to 76\%.\cite{kennedy-etal-2016} This large range indicates that some online firms do better than others. Perhaps we should weight according to the polling firm instead of the poll.
+
+
+
+
+
+
+
+%%% ===
+%%% === %%% === %%% === %%%
+\subsection{The Population of Interest}\index{voter}\index{voter!likely}
+For estimating the outcome, it is very clear that the population of interest is all people who actually voted on June 23 in the Brexit referendum. It is also clear that this target population does not exist until \emph{after} the polls close. How can we possibly estimate the average position of a non-existent population? This is one of the most difficult challenges in polling. 
+
+Some polling firms tend to estimate this future population using some method, while others simply report estimates on the current level of support. To estimate who will be a member of the voting population, some firms simply ask the respondent if they plan to vote. Others provide a 0--10 scale and weight the results according to that value. Others use proprietary algorithms that are based on such factors as previous voting patterns and the importance of the vote results. 
+
+Unfortunately, many polling firms do not indicate who is in the sampled population, whether there is weighting involved, how those weights are determined, or how they are used. In several cases, the firm provides this information, but the media reports do not. This makes investigating the effect of the sampled population difficult.
+
+
+\begin{figure}\centering
+ \includegraphics[width=0.98\textwidth]{chapters/brexit/pollsPop}
+ \caption[Brexit-2016 polls by population]{A plot of all polls in the data set, separated by population: likely voters, registered voters, all adults. The arrow, $\leftarrow$, is the actual result for the 2016 Brexit referendum.}
+ \label{fig:brexit-pollsPop}
+\end{figure}
+
+
+To gather the data used in Figure~\ref{fig:brexit-pollsPop}, I tried to determine the sampled population used in the poll. In some cases, the publication was very explicit; in others, less so. When a polling firm tended to one type of population, I would impute that value. If I had no idea, I would leave the poll blank. 
+
+The interesting thing about this graphic is that polls of ``likely voters'' became very erratic in the waning weeks of the election period. The position of ``all adults'' was much more stable. Furthermore, the ``all adult'' surveys came closer to the actual Brexit vote (the left arrow, $\leftarrow$).
+
+What could cause this? Did the ``likely voter'' polls severely underestimate who would vote? That seems to be the logical conclusion from Figure~\ref{fig:brexit-pollsPop}. This may be due to a couple of reasons: those who said they would vote decided to stay home; or those who said they would not vote decided to vote.
+
+Or did the ``undecided'' voters break in a particular direction?\index{voter!undecided}
+
+
+
+
+
+
+
+
+%%% ===
+%%% === %%% === %%% === %%%
+\subsection{Breaking Undecideds}\index{voter!undecided|textbf}
+Figures~\ref{fig:brexit-pollsAll} through \ref{fig:brexit-pollsPop} show the proportion of those polled who support Brexit. This actually misstates the support levels in the population because the ``undecideds'' are not counted. Figure~\ref{fig:brexit-pollsBounds} gives a better picture of what the polls are really saying. 
+
+
+\begin{figure}\centering
+ \includegraphics[width=0.98\textwidth]{chapters/brexit/pollsBounds}
+ \caption[Brexit-2016 polls showing support level]{A plot of all polls in the data set, with a smoother curve. The lower curve is the level of support for Brexit in the poll. The upper curve is the level of ``maybe-support'' for Brexit. The arrow, $\leftarrow$, is the actual result for the 2016 Brexit referendum.}
+ \label{fig:brexit-pollsBounds}
+\end{figure}
+
+Like the other figures, Figure~\ref{fig:brexit-pollsBounds} provides the support for Brexit in each poll ($\times$). It also provides the level of ``maybe support'' for Brexit ($+$).\footnote{This ``maybe support'' is the proportion of respondents in favor of Brexit \emph{plus} the proportion of undecided respondents in the poll. In other words, if the $50\%$ line is in the space between the two curves, the the polls are uncertain as to which side will win. However, if the line is either entire above the upper curve or entirely below the bottom curve, then the polls are either concluding that the vote will be in favor of Brexit (above) \emph{or} against Brexit (below).}\index{support} The two grey smoother curves essentially illustrate the upper and lower bounds on Brexit support. The dark smoother curve is the middle of the two extremes, representing the most likely level of support.
+
+Examining the polls in these terms does a much better job of illustrating the level of uncertainty caused by the ``undecided'' respondents. The upper bound for voting day is $52.18\%$; the lower, $44.87\%$. The observed value is $51.89\%$, which is between these two extremes.
+
+While the final interval does contain the true vote share, it is still a rather wide $7.31\%$. It would be nice to increase the precision of our estimate (reduce the interval width) while retaining the expected accuracy. The next section seeks to accomplish these two goals by combining several polls.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%%% === %%% === %%% === %%% === %%% === %%% === %%% === %%% === %%% === %%%
+\section{Combining the Polls}\index{polling!combining}
+Recall that Chapter~\ref{ch:combiningPolls} took us beyond estimating support from just one poll. One could combine polls to obtain better estimates of the election outcome. All that was needed was to select an appropriate weighting function and perform the calculations.\index{polling!combining}
+
+\begin{figure}\centering
+ \includegraphics[width=0.98\textwidth]{chapters/brexit/pollsEstimates}
+ \caption[Estimated Brexit support]{A plot of the estimated support for Brexit. The vertical segments indicate the 95\% confidence interval for each day. The grey shape is the smoothed confidence interval envelope. The arrow, $\leftarrow$, is the actual result for the 2016 Brexit referendum.}
+ \label{fig:brexit-pollsEstimates}
+\end{figure}
+
+Figure~\ref{fig:brexit-pollsEstimates} shows one set of daily estimates. For this graphic, I used the Gaussian weighting function with a half-life of $\theta=3$. This choice came from personal experience and nothing particular to this election. Such a small half-life allows the model to better reflect a sudden change in referendum support. The result of allowing this is that the amount of data is reduced. Ultimately, the choice of $\theta$ is a balancing act between model responsiveness (smaller theta) and efficiency (larger theta).
+
+In addition to weighting polls according to their age, this model also weighted polls according to the researcher's belief in their quality. While this is fundamentally a subjective activity, and two researchers will most likely weight the same poll differently, it does allow the researcher finer control over what is included in the model, and how much it counts. In accord with Section~\ref{sec:combiningPolls-avgWeightedTime}, the effect of the weighting is only on the sample size. Thus, if I give the XYZ poll a weight of $0.50$, then I would simply multiply its sample size by $0.50$ to obtain the weighted poll result. For this particular exercise, I weighted the polls with values between $0.50$ and $1.00$ based the information present and whether it was a telephone poll.\index{polling!mode}\index{polling!weighting}\index{weighting data}
+
+
+Note that this model concludes that the majority of voters will vote \emph{against} Brexit, which is not what happened. It does, however, reflect all of the other models used, as well as expert opinion at the time.\cite{erlanger-2016} Had I weighted the online polls higher, and the telephone polls lower, the final estimate would have been closer.
+
+However, the problems with the Brexit polling were much deeper and more fundamental, as the next section discusses.
+
+
+
+
+
+
+
+
+
+
+
+
+
+%%% === %%% === %%% === %%% === %%% === %%% === %%% === %%% === %%% === %%%
+\section{Discussion: What Went Wrong?}
+The results of the Brexit vote were surprising to many. The markets reacted negatively to the news that the United Kingdom was starting to undo two generations of work to bring Europe closer together. The stark difference in Brexit support between England and Scotland led Holyrood to declare that Scottish independence would be voted upon in the near future (see Chapter~\ref{ch:polling101}).\cite{erlanger-2016} In short, we were wrong. \\
+
+But \emph{why} were we wrong?
+
+
+
+
+
+
+
+
+\subsection{Stratified Sampling and Demographics}
+Recall Chapter~\ref{ch:polling399}, where we discussed stratified sampling. This is the technique used by polling firms to adjust the demographic bias of a sample. In doing this, the estimates tend to be closer to reality.\index{stratified sampling}
+
+Section~\ref{sec:polling399-stratifiedsampling} warns us, however, that the stratified estimator is biased unless the assumed population proportions (weights) are correct. In Section~\ref{sec:polling399-bias-experiments}, we performed some statistical experiments to see how close we had to be with our weights before the estimates became so poor that they were ``worthless.'' For the experiment described, we concluded that being within $2$ percentage points led to advantages over simple random sampling.
+
+However, that does not answer our \emph{real} question: How far off can we be before our support estimates are worthless? In the Brexit example, one could easily conclude that predicting the wrong result makes the prediction worthless. Since the estimates were so close to $50\%$, the weights had to be even closer to reality than the 2pp rule of thumb (page~\pageref{box:polling399-2pp}).
+
+Add to this the fact that the population weights refer to the demographics of those who actually turned out to vote. If the turnout is different than what is expected, then the weights are necessarily wrong. Is this what we find in the Brexit referendum? Yes.
+
+The 72\% turnout was the highest for any British election since 1992, and for any British referendum \emph{ever}.\cite{erlanger-2016} This high turnout was not constant across all groups. The older voters turned out at a much higher rate than did the younger, 90\% of the former vs. 64\% of the latter.\cite{helm-2016} This, in itself, is not a problem. It becomes a problem when age is correlated with referendum support, and the older voters tended to support Brexit while the younger did not.\cite{moore-2016} Since the polling firms underestimated the turnout for older people, they underestimated the total support for Brexit (see Section~\ref{sec:polling399-bias}).
+
+Furthermore, it appears as though certain demographics, usually not weighted for in stratified sampling, were important in predicting the voter's intent. A person's level of education was highly correlated with the person's support for Brexit. Of those with a university degree, 32\% voted for Brexit, while those without college experience\footnote{Technically, the group supporting Brexit at 70\% is those with a GSCE or less. Those with an A-level (or equivalent) were evenly split on Brexit, as were those with some university.} voted 70\% for Brexit.\cite{moore-2016} 
+
+That age is related to Brexit support is not problematic --- unless the weights used in adjusting the individual samples are not correct. That education level is related is also not a problem, unless the distribution of education is related to turnout, in which case it is a huge problem. It is even more of a problem if those last-minute deciders tended to be in the same educational category. It is quite reasonable to expect those with a university degree to tend to make decisions earlier since they have much more access to news. However, to determine if the undecided voters tended to be correlated with education level, one would need the data. Unfortunately, education level tended to not be stratified by polling houses. Age was. Gender was. Political orientation was. Education level was not.\\
+
+I believe \emph{this} was the main reason the polls were wrong.\\
+
+\noindent
+Detecting this problem is straight-forward. Polls just have to ask a question about educational attainment. Then, when they start to detect a relationship between education and Brexit support, they need to start stratifying on education. However, what other demographics need to be recorded? Current polls can take upwards of 10 minutes --- or more --- to complete. Adding additional questions will only drive that time up, and the response rates down. As with most things in statistics, increasing quality in one area tends to reduce quality in another.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%%% === %%% === %%% === %%% === %%% === %%% === %%% === %%% === %%% === %%%
+\section{Conclusion}
+The main purpose of this chapter was to illustrate the theory of the past few chapters with a concrete application. The 2016 Brexit vote was selected because it had a lot of data \emph{and} because the polls ``missed'' the right answer. This allowed us to investigate more fully what went wrong and make suggestions for future polling.
+
+Brexit opinion polls tended to use stratified sampling. They did this to help adjust for the demographic randomness in each sample. That is, while a single random sample may easily have a gender-ratio of 1.35 (135 females per 100 males responding), skewing the estimate toward the ``female position,'' stratified sampling would weight the responses so that the sample would effectively have a ratio of 1.00 (or whatever the polling house believed the voting population would be). In this election, there was not such a gender gap. Females and males tended to support Brexit at about the same rate. The last opinion poll by YouGov had females support Brexit at 48\%; males at 49\%.\cite{yougov-2016} 
+
+Thus, it was not the gender gap that caused problems for the Brexit polls. The problem turned out to be age and education level. While the polls \emph{did} tend to stratify on age, they did so at the wrong level. Older voters turned out at 90\%, much higher than weighted for in the polls. Furthermore, there was a strong differential support for Brexit across the education categories, which tended to not be a stratifying variable.
+
+
+
+
+If there is a lesson to Brexit for pollsters, it is that we need to be more aware of how certain demographics will support (or not support) the referendum position. Once we are aware of a confounding variable, we need to stratify on that variable. This will be difficult at first, especially since we will not know the voting turnout for each of the strata in the upcoming election. However, it will be a necessary first step.
+
+
+If there is also a lesson to Brexit for the media, it is that more information needs to be presented to your audience about the polls. Merely saying that Poll X estimates 48\% support for Brexit ignores a lot of important information. The sample size, the strata, and the sampled population are key pieces of data that will help your readers better understand the article. Furthermore, ensuring that the polling house is able to defend their choices and give some indication of how important their assumed weights are to their final estimates would allow your readers to know where to focus.
+
+
+
+
+
+
+
+
+
+
+
+
+% End of File

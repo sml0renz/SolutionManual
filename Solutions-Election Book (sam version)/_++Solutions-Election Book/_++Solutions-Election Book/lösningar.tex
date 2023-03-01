@@ -1,0 +1,110 @@
+% !TeX TS-program = pdflatexmk
+\documentclass[krantz1]{krantz}
+
+
+%%% CRC suggested packages
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{multicol}
+
+
+
+%%% Additional suggested packages
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+\usepackage{emptypage}
+\usepackage{url}
+
+
+\title{Elections with Statistics: Polling, Prediction, and Testing}
+\author{Ole J. Forsberg, Ph.Dd.}
+\date{\today}
+
+
+
+%%%%% %%%%% %%%%% %%%%% %%%%% %%%%% %%%%% %%%%% %%%%% %%%%%
+%%% My packages
+\allowdisplaybreaks
+
+\usepackage{mathtools}
+\mathtoolsset{showonlyrefs}
+
+\usepackage{xcolor}
+\usepackage{booktabs}           %% Nicer tables
+\usepackage[formats]{listings}  %% Allow code listing
+
+%\usepackage{tikz}
+\usepackage{environ}
+
+\usepackage{styleFiles/_symbols}
+\usepackage{styleFiles/_environments}
+\usepackage{styleFiles/_colors}
+
+\usepackage{ucs}
+\usepackage[utf8x]{inputenc}
+\SetUnicodeOption{graphics}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%%%%% %%%%% %%%%% %%%%% %%%%% %%%%% %%%%% %%%%% %%%%% %%%%%
+%% ----- ===== ----- ===== ----- ===== ----- ===== ----- %%
+%%% Let us begin!
+
+\begin{document}
+
+
+\setlength{\tabcolsep}{1em}        % Default value: 6pt
+
+
+
+
+%%%%% %%%%% %%%%% %%%%% %%%%% %%%%% %%%%% %%%%% %%%%% %%%%%
+%%%%% %%%%% %%%%% %%%%% %%%%% %%%%% %%%%% %%%%% %%%%% %%%%%
+%% ----- ===== ----- ===== ----- ===== ----- ===== ----- %%
+\mainmatter
+
+
+
+%%%%% ##### %%%%%
+\include{solutions/s-polling101}
+
+%%%%% ##### %%%%%
+\include{solutions/s-polling399}
+
+%%%%% ##### %%%%%
+\include{solutions/s-combiningPolls}
+
+%%%%% ##### %%%%%
+%\include{chapters/brexit/chapter}
+
+
+%%%%% ##### %%%%%
+\include{solutions/s-digitTests}
+
+%%%%% ##### %%%%%
+\include{solutions/s-differentialInvalidation}
+
+%%%%% ##### %%%%%
+\include{solutions/s-geography}
+
+%%%%% ##### %%%%%
+%\include{chapters/sriLanka/chapter}
+
+
+
+\end{document}
+

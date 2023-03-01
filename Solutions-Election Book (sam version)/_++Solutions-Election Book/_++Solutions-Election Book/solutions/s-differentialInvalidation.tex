@@ -1,0 +1,78 @@
+\chapter{Differential Invalidation}\label{ch:regression} 
+
+
+\subsection*{Review}
+\begin{enumerate}
+
+ \item Compare and contrast the four regression methods discussed in this chapter.
+\begin{solution}
+We looked at four different types of regression: Ordinary Least Squares (OLS), Weighted Least Squares (WLS), Binomial Regression (GLM), and Beta-Binomial Regression (VGLM). The objective of OLS is to minimize the sum of the squared errors. We also need to make asumtions about the residuals: they follow a normal distribution, they have a constant mean, and they have a constant variance. In many real-life applications, the variances are heteroskedastic, meaning they are not constant. In this case, a typical solution is WLS as a way to estimate the slopes, and the new objective is to minimize the weighted sum of the squared errors. In the case of normality violation and when the dependent variable follows a binomial distribution, we can use a GLM. This helps to improve WLS. Last but not least, we looked at a VGLM. Recall we did this when the data was overdispered; for example, people that live in the same area typically share the same political views, which makes the data `clumpy`. Using a VGLM can help adjust to this idea. 
+\end{solution}
+ 
+ \item What is differential invalidation?
+\begin{solution}
+Differential invalidation is when votes for one demographic is invalidated at a higher rate than the other.
+\end{solution}
+ 
+ \item What is ballot box stuffing?
+\begin{solution}
+Ballot box stuffing is when one person submits many ballots during a vote in which only a signle ballot per person is legal.
+\end{solution}
+ 
+ \item How does differential invalidation affect the electoral divisions displayed on an invalidation plot.
+\begin{solution}
+When the ballots are systematically invalisated based on the candidate they were cast for, then there is a significant slope that becomes distinct in the plot. 
+\end{solution}
+ 
+ \item Compare and contrast statistical significance and practical significance.
+\begin{solution}
+Statistical signifigance arises from modeling and p-values and the hypothosesis, whereas practical significane is the ability to provide a more reasonable bound. A way I like to think about this is when detecting fraud, we should be testing with a \emph{very} small singificance level. Accusing someone of electoral fraud is a huge deal, so we need to be sure, which is where practical signifigance comes from. We need to view patterns, how much things are changing, and why they are changing. Statistics is a tool to help us get to these conclusions. 
+\end{solution}
+
+\end{enumerate}
+
+
+
+\subsection*{Conceptual Extensions}
+\begin{enumerate}
+
+ \item Why do the conclusions in this chapter never state that an election was unfair?
+\begin{solution}
+This brings back the question regarding statistical and practical significance; we can have statistical evidence that there is differential invalidation, but this is indication and not solid truth. Like stated, accusing a candidate of fraud is a pretty big deal, so we need to be clear between statistical significance and practical significance. 
+\end{solution}
+ 
+ \item How does ballot box stuffing affect the electoral divisions displayed on an invalidation plot.
+\begin{solution}
+Ballot box stuffing will look about the same as differential invalidation; as more votes are cast for one candidate, then the invalidation rate will decrease. Therefore, in the case of ballot box stuffing, the slope will go from insignificant to significant an have a slope. 
+\end{solution}
+ 
+ \item What does a p-value indicate?
+\begin{solution}
+The p-value tells us how likely our null hypothesis is to occur; a very small p-value tells us to reject our null hypothesis (as it has a very small probability of actually occuring) and a large p-value tells us to accept the null hypotesis (as it has a very large probability of occuring). 
+\end{solution}
+ 
+ \item If you is concerned with practical significance, should you pay attention to the confidence interval or the p-value?
+\begin{solution}
+When concerned with practical significance, for example, we may want to be paying attention to how much the invalidation rate is increasing. This is easier to do with confidence intervals as opposed to p-values. It is true that a p-value going from 0.05 to 0.0005 may give us a little more insight into what is happening election to election, but confidence intervals give us a solid range. Really, it is up to the scientist. 
+\end{solution}
+ 
+\end{enumerate}
+
+
+
+
+\subsection*{Computational Extensions}
+\begin{enumerate}
+
+ \item Perform the generalized Benford test on the C\^{o}te d$^{\prime}$Ivoire data to see if there is evidence of vote count-fraud in the 2010 election.
+\begin{solution}
+Below is the R code I used for this problem:
+\begin{codein}
+dt <- read.csv("https://ews.kvasaheim.com/data/civ2010pres2cei2.csv")
+attach(dt)
+BenfordTest(dt[,6])
+BenfordTest(dt[,7])
+\end{codein}
+When ran, the p-value for Gbagbo was 0.3564 and the p-value for Outtara was 0.5332. Thus, we do not have significant evidence of vote count fraud in the 2010 C\^{o}te d$^{\prime}$Ivoir election.
+\end{solution}
+\end{enumerate}

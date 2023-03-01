@@ -1,0 +1,155 @@
+\chapter{Considering Geography}\label{ch:geo}
+\subsection*{Review}
+\begin{enumerate}
+
+ \item What is differential invalidation?
+\begin{solution}
+Differential invalidation is when votes for one demographic is invalidated at a higher rate than the other.
+\end{solution}
+ 
+ \item How does one detect differential invalidation?
+\begin{solution}
+Differential invalidation can be detetected using regression and by using spatial analysis. 
+\end{solution}
+ 
+ \item Why does one typically use distance measures instead of contiguity measures for $\mat{W}$?
+\begin{solution}
+Contiguity measures are important for allowing us to determine whether or not spatial correlation can be detected; however, using distances allows the $\mat{W}$ matrix to have a large enough sample size so the Central Limit Theorem can help. 
+\end{solution}
+ 
+ \item What is the $\mat{J}$ matrix? Let $\mat{A}$ be a $3 \times 3$ matrix. What are $\mat{JA}$ and $\mat{AJ}$? In other words, what deos pre- and post-multiplying by $\mat{J}$ do?
+\begin{solution}
+Recall that $\mat{J}$ is a square matrix of all 1's, so it is $n \times n$ in size.  $\mat{JA}$ will be a $3 \times 3$ matrix of all 3's, as will $\mat{AJ}$. Pre and post multiplying by $\mat{J}$ does the same thing, since $\mat{J}$ is an $n \times n$ matrix of all 1's. 
+\end{solution}
+ 
+ \item Why is \var{quasibinomial} used instead of \var{binomial}?
+\begin{solution}
+We use the \var{quasibinomial} in order to adjust for overdispersion. It is no surprise when citizens from the same area vote similarly, so the \var{quasibinomial} helps adjust for this `clumpiness`. 
+\end{solution}
+ 
+ \item What does the \var{quasi} mean in \var{quasibinomial}?
+\begin{solution}
+\var{Quasi} is a suffix that says "having a resemblance of" or "close to" something. By using \var{quasi} in front of binomial, it tells us that the data follows a distriubtion similar to the binomial, but needs a bit of correction. 
+\end{solution}
+ 
+ \item How important is it to select the correct weighting function (Table~\ref{tab:geo-kernels})?
+\begin{solution}
+It isn't necassarily the kernel function that is important, but the choice if the bandwidth. So, the choice of the weighting function kernel is rather arbitrary, but the bandwidth should be prioritized.  
+\end{solution}
+ 
+ \item Compare and contrast all four geographic methods covered in the chapter. What were their strengths and their weaknesses? 
+\begin{solution}
+The first model we looked at was the Spatial Lag Model (SLM). THe SLM includes a temporally lagged dependent variable as an independent varaible. This lagged deoendent variable is a nieghborhood average. What's interesting is the neighbor affect, $\rho$, can be determined as biased or unbiased by using the SLM. Although the SLM is effective in reducing spatial correlation, it makes a bold assumption that the parameter effect is constant. We then looked at the Casetti's Spatial Expansion Model (SEM). The SEM model differs because it models spatially varying effects; therefore, it uses a function of $\beta_{1}$. The major drawback of the SEM is instead of using a linear fit, it uses a polynomial. A high degree polynomial will allow the estimated effect function to match true variation, but it will reduce the degrees of freedom, which infaltes the p-values. We then looked at the Geographically Weighted Regression model, which uses weighted regression functions. Because of this, it does not use the typical measure for degrees of freedom. There are not many drawbacks to a GWR, other than the fact the test should not be used until the degrees of freedom can be determined. The last model e looked at was the Spatial Lagged Expansion Method (SLEM). THe SLEM model is a combination of the spatial lag model and the expansion method to allow flexibility for geographically weighted regression. The drawback to this model is it was created really for explatory analysis; but, it produces a better model than GWR. 
+\end{solution}
+
+\end{enumerate}
+
+
+
+\subsection*{Conceptual Extensions}
+\begin{enumerate}
+
+ \item Why might candidate support be spatially correlated?
+\begin{solution}
+Candidate support can be spatially correlated because people near one another tend to vote similarly.
+\end{solution}
+ 
+ \item What do Matruh and New Valley (\textit{El Wadi El Gedid}) governorates have in common?
+\begin{solution}
+Matruh and New Valley are both to the West of Egypt, where support for the 2011 Referendum was very high. In these governorates, the invalidation rate was fairly low. 
+\end{solution}
+
+ \item What do Cairo and Giza governorates have in common?
+\begin{solution}
+In Giza and Cairo, the support for the 2011 Referendum was low. In turn, the invalidation rate for these two governorates was higher than that of the governorates that did support the Referendum. 
+\end{solution}
+ 
+ \item Referring to page~\pageref{ex:Wcontiguous}, what would $\mat{W}^3$ represent? How many zero entries would it have?
+\begin{solution}
+The $\mat{W}^3$ represents a third-order contiguity. So, we are concerened with neighbors of neighbors of neighbors. Therefore, we would have 24 zeros in our matrix (assuming we are using rook conginuity).
+\end{solution}
+ 
+ \item How would one determine the functional form in Casetti's SEM?
+\begin{solution}
+We can determine how many extreme a map has (minimum or maximum) and use the correct polynomial to find the right function. This could be an issue the higher we go in polynomial from because we risk losing degrees of freedom.
+\end{solution}
+ 
+ \item What methods are available for testing hypotheses using geographically-weighted regression (GWR)?
+\begin{solution}
+We could take the GWR a step further and use a SLEM model, or we can test significance using a t-test.
+\end{solution}
+ 
+\end{enumerate}
+
+
+
+
+
+
+
+\subsection*{Computational Extensions}
+\begin{enumerate}
+ \item Fit the model of Section~\ref{sec:SLEMegypt} using linear effects.
+\begin{solution}
+Below is the R code used for this problem:
+\begin{codein}
+source("https://ews.kvasaheim.com/Rfctns/electionTesting.R")
+install.packages("spgwr")
+library(spgwr)
+
+de <- read.csv("https://ews.kvasaheim.com/data/egy2011referendum.csv")
+attach(de)
+View(de)
+
+pInv = INVALID/TOTAL
+pSup = VALID/INVALID
+
+dists <- as.matrix(dist(cbind(north, west)))
+dists.inv <- 1/dists
+diag(dists.inv) <- 0
+w =dists.inv
+
+J = matrix( rep(1, 27^2), ncol=27)
+wstar =  (w) / (w \%*\% J)
+contagion = wstar \%*\% pInv
+
+modSLEMlinear <- lm(pInv ~ west*north*contagion + I(west) + I(north) + west*north*pSup + I(west)*pSup + I(north)*pSup)
+summary(modSLEMlinear)
+\end{codein}
+
+Notice we take away the squared $u$ and $v$ variables (west and north) to use the linear effect. Below is the regression table.
+\begin{center}
+\begin{table}[t]\centering
+\begin{tabular}{llrrrr}
+\phantom{X} & & Estimate & Std. Error & t-value & p-value \\
+\midrule
+\multicolumn{2}{l}{\textbf{Nominal Effect}} \\
+ & Intercept    & 5.031 & 5.877 &  0.856 & 0.405 \\
+ & North        &  -0.1771 &  0.1963 & -0.902 & 0.381 \\
+ & West         &  0.1428 &  0.1811 &  0.788 & 0.443+65 \\
+ & N $\times$ W &  -0.005080 &   0.006058 & -0.839 & 0.415\\
+%
+\midrule
+%
+\multicolumn{2}{l}{\textbf{Neighbor Effect}} \\
+ & Intercept    & -517.3\phantom{000} & 636.7\phantom{000} & -0.813 & 0.429 \\
+ & North        & 17.52\phantom{00}  & 21.42\phantom{00}  & -0.818 & 0.426 \\
+ & West         &  -15.02\phantom{00}  & 19.72\phantom{00}  &  -0.762 & 0.458 \\
+ & N $\times$ W &  0.5098            & 0.6643             &  0.767 & 0.455 \\
+%
+\midrule
+%
+\multicolumn{2}{l}{\textbf{Referendum Effect}} \\
+ & Intercept    & 0.3669 & 1.532 & 0.239 & 0.814 \\
+ & North        & -0.003254 & 0.05220 & -0.602 & 0.951 \\
+ & West         & 0.1456 & 0.04887 & 0.298 & 0.770 \\
+ & N $\times$ W &  0.0001901 & 0.001670 &  -0.114 & 0.911 \\
+%
+\end{tabular}
+\end{table}
+\end{center}
+
+Notice the changes. Our adjusted $R^{2}$ also has decreased.
+\end{solution}
+\end{enumerate}
+

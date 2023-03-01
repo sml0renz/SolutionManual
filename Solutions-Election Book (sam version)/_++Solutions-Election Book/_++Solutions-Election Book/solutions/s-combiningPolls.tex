@@ -1,0 +1,206 @@
+\chapter{Combining Polls}\label{ch:combiningPolls}
+
+
+\subsection*{Review}
+\begin{enumerate}
+
+ \item Our first attempts at averaging polls was to simply average the proportions. In that case, how did we determine that averaging the sample sizes was better than adding them?
+\begin{solution}
+On page 60, we ran an experiment that generated results from five polls at a fixed value of $\pi$. We then found the coverage rate of the experiment (how often $\pi$ was actually in our interval). When we did this, we found for adding samples $\pi$ was only present 55\% of the time. Because it does not get us close to our claimed coverage, compared to averaging the sample sizes, we determined averaging was the way to go.
+\end{solution}
+
+ \item Why does a weighted average make more sense than a simple average?
+\begin{solution}
+When we use the weighted average, we are using the number of people in the poll who support a certain canidate; in other words, we are treating multiple polls as just one large poll, which makes calculations more efficient and the confidence intervals are more practical. 
+\end{solution}
+
+ \item What is the difference between accuracy and precision?
+\begin{solution}
+Accuracy tells us how close a measurement is to the true value, whereas precision refers to how close the measurements of the same experiments are to one another. Another way to think about precision is how repeatable a measurement is amongst experiments. 
+\end{solution}
+
+ \item How did we measure accuracy in Section~\ref{sec:combiningPolls-avgBasic}?
+\begin{solution}
+An example of measuring accuacy is on page 61, where we ran the experiment and determined how close the claimed coverage was to the actual coverage. 
+\end{solution}
+
+ \item How did we measure precision in Section~\ref{sec:combiningPolls-avgWeighted}?
+\begin{solution}
+We measured precision in the first expiriment when we ran multiple polling expiriments to determine whether or not $\pi$ was in our confidence interval. This is an example of precision because we are repeating the experiment and trying to see how often we come across $\pi$. 
+\end{solution}
+
+ \item Why is it important to take into consideration the age of the poll?
+\begin{solution}
+It is important to consider the age of a poll because there could be things that affect a candadite's approval rate. For example, what if there is a huge scandal in April and their rate shoots downward, but in May, it was revealed to be a false accusation? This would cause, potentially, pretty large changes across the board. 
+\end{solution}
+
+ \item Which of the three weighting functions described in the text is the best? How would we know?
+\begin{solution}
+Really, it depends. The rectangular function has a potential of weighting heavily if, during that range of time, a candidate has a decreasing or increasing amount of support because it emphasizes recent polls; but, the width of the rectangular function can be tampered with. The triangular function reduces the weight on the poll as time passes, so it will still weight the newer polls more heavy. The gaussian function weights more-recent polls heavier than the older polls, but still gives a positive weight to everything. 
+
+The functions that weight newer polls more have confidence intervals with higher endpoints. With this being said, the narrower the interval, the more precise. So, in the case of South Korea and using Table 3.1, I would say the triangular and gaussian function would be our best bets because they seem the most narrow and the best distribution of weights from old and new polls, whereas the rectangualr function takes too much weight on the newer polls. 
+\end{solution}
+
+ \item Why did we use linear regression in this chapter? When would it be appropriate to use? When would it \emph{not} be appropriate?
+\begin{solution}
+We used weighted least squares regreession (WLS) to make predictions for support levels of candidates. Regression is appropriate to use when the proper requirements are met, such as normality of the residuals, constant expected value of the residuals, and constant variance of the residuals. It is not appropriate when making future estimations or if our data doesn't have the proper distribution we need to preform OLS or WLS. 
+\end{solution}
+
+\end{enumerate}
+
+
+
+
+
+
+\subsection*{Conceptual Extensions}
+\begin{enumerate}
+
+ \item Using just the maps of Figure~\ref{fig:combiningPolls-kor2017pres}, can you tell which candidate is ahead? What additional information would you need? Why are maps like these misleading for determining which candidate is ahead?
+\begin{solution}
+It is really difficult to tell who is ahead; one may notice more lighter splotches on the map for Hong compared to Ahn, yet there are many more darker splotches on Hong's graphic than Ahn's. It may be useful to have population information. So, if one district has a small population and not a lot of votes compared to a mich larger support rate for a much larger population, this will not affect much. The maps are misleading because we are missing information (dates, population numbers, where the capitol is, etc). 
+\end{solution}
+
+ \item The basic assumption for this chapter (page~\pageref{combiningPolls-assumptions1}) is that the polls are estimating the same population. Why does this assumption need to be stated?
+\begin{solution}
+This assumption needs to be stated because determining likely voters and non-likely voters is up to the polling stations. Although when populations tend to be similar and errors are minor, this could cause the wrong winner. Futhermore, the thought process (and statistics) would change if we did not operate under this assumption. 
+\end{solution}
+
+ \item What is a ``likely voter,'' and how would you determine one?
+\begin{solution}
+A likely voter is someone who has indicated strong intentions to vote on election day. Determining a likely voter could be done in a few ways, but one is a survey sent out by the polling houses looking for interest in likely voters. 
+\end{solution}
+
+ \item Why is it more satisfying to weight polls with larger sample sizes more than those with smaller?
+\begin{solution}
+The larger the sample size, the more information we can get. When we have more information, it can make predictions and confidence intervals more accurate and precise. 
+\end{solution}
+
+ \item Why do we expect the coverage rates in Section~\ref{sec:combiningPolls-avgBasic} to be close to 95\%?
+\begin{solution}
+We believe that the paramater, $\pi$, will be in the confidence interval 95\% of the time. So, because we are working with this prediction at a 95\% confidence interval, we can expect the coverage rate to be pretty close to 95\%. 
+\end{solution}
+
+ \item What would happen to the interval widths if the confidence level is changed from 95\% to 90\%? What would happen if we change them to 100\%?
+\begin{solution}
+If we make our confidence interval lower, then we will expect the widths to get wider since we are not as precise. I would not recommend doing a 100\% confidence interval, because that is practically saying there is no way your prediction is wrong, but the widths would become very narrow since there is such certainty.
+\end{solution}
+
+ \item How should we determine the appropriate weighting function (Figure~\ref{fig:combiningPolls-weighters})?
+\begin{solution}
+The appropriate weighting function can be determined based off where you want the weight; for example, notice the rectangular function seems to wait fairly heavy on just recent polls, whereas the triangular and Gaussian use the old polls as well. 
+\end{solution}
+ \item Why were the estimates so good for Moon and Hong, but so wrong for Ahn?
+\begin{solution}
+Using regression assumes that current trends continue, and there is nothing in the data that suggests why Ahn's polls are falling. So, the regression did not really take into account things like die-hard supporters, increase of support if a scandal was found to be false, media, and many other factors. Because the regression just took that decline in data and ran with it, it caused things to go wrong for Ahn. 
+\end{solution}
+
+\end{enumerate}
+
+
+
+
+
+
+\subsection*{Computational Extensions}
+\begin{enumerate}
+
+ \item Estimate the Hong support level on election day using other weighting functions. Which of the weighting functions of Table~\ref{tab:combiningPolls-weightingTable} produces the best estimate of his actual support level?
+\begin{solution}
+Below is the R code for this problem. Make sure you understand it, as well as the explanation at the end.
+
+\begin{codein}
+###### This is just getting the functions ready ########
+
+## Rectangular function
+
+rectangleWeight <- function(daysAgo, theta, n) {
+  weight = ifelse(daysAgo>theta, 0, 1)
+return(n*weight)
+}
+
+## Gaussian weight
+
+gaussianWeight <- function(daysAgo, theta, n) {
+  weight = dnorm(daysAgo/theta*1.17741/dnorm(0))
+return(n*weight)
+}
+
+###### Now we are going to load the data
+library(readr)
+korData <- read_csv("C:/Users/18153/Downloads/kor2017pres-polls.csv")
+
+attach(korData)
+
+###Rectangle function###############33
+
+pHong = `Liberty Korea`
+nHong = round(pHong*n)
+allPoll = rectangleWeight(129-doy,7,n)
+allHong = pHong*allPoll
+
+N = (sum(allPoll))
+X = ( sum(allHong))
+
+wald.test(X,N)
+
+############Guassian function#####################
+
+allPoll1 = gaussianWeight(129-doy,7,n)
+allHong1 = pHong*allPoll1
+
+N1 = (sum(allPoll1))
+X1 = ( sum(allHong1))
+
+wald.test(X1,N1)
+
+
+\end{codein}
+
+When using the rectangular function, we get a 95\% confidence interval of 18.0\% to 19.2\%, which a little larger than the triangular function. When using the Gaussian function, we get a 95\% confidence interval of 10.1\% to 26.0\%. This is larger than both the rectangular weight and triangular weight function, but is the only interval that contains Hong's support level (which is 24.03\%). 
+\end{solution}
+
+ \item Devise an experiment to determine when the Wald procedure is superior to the exact Binomial procedure in estimating the population proportion.
+\begin{solution}
+Recall in chapter 1 how we determined when the Agresti-Coull procedure was superior to the sample proportion.  We ran an experiment in R, and we will do something similar here:
+
+\begin{codein}
+## Initialization
+n = 15
+pi = 0.700
+confLevel = 0.95
+
+
+# Set aside internal memory
+coverB = coverW = numeric()
+clB = clW = numeric()
+
+
+# ## Begin experiment
+for(i in 1:1e4) {
+
+sample = rbinom(1 , size=n , prob=pi) ## The sample
+
+# Binomial
+clB = binom.test(x=sample,n=n)$conf.int
+coverB[i] = ( clB[1]<=pi && pi<=clB[2] )
+
+
+# Wald
+clW = wald.test(x=sample,n=n)$conf.int
+coverW[i] = ( clW[1]<pi & pi<clW[2])
+}
+
+# End experiment
+
+
+# ## Results
+mean( coverB ) ## Coverage using binom.test
+mean( coverW ) ## Coverage using wald.test
+\end{codein}
+
+Notice that the Wald coverage is 95\% and the Binomial coverage is 98\%. When the sample size is very large, both will become about the same. As the sample size gets smaller, the Binomal is the winner. Play with these paramaters and see when the Wald test beats the Binom test in other situations. 
+\end{solution}
+
+\end{enumerate}
+

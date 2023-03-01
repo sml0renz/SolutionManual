@@ -1,0 +1,189 @@
+\chapter{Digit Tests}\label{ch:digitTests}
+
+
+\subsection*{Review}
+\begin{enumerate}
+
+ \item Why would it be easier for counting fraud to take place in the 2009 Afghan election than a typical Ghanaian election?
+\begin{solution}
+Recall on page 100, Ghana sends the ballots to the national electoral commission. They record all the votes for the polling stations and have candidate agents sign off on the legitamacy. They are then forwarded to the Electoral Commission, they are counted, and the winner is announced. In Afghanistan, the ballot papers are sent to a central counting facility. Because of the centralizd counting, it is much easier to have fraud since one has to control such a small group. 
+\end{solution}
+
+ \item What conditions are necessary for an election to be democratic?
+\begin{solution}
+An election needs to be free and fair. In terms of free, each citizen has a right to vote. For fair, this vote actually has to matter; this means that the votes all have the same probability of counting and one demographic doesn't have a higher probability than the other. 
+\end{solution}
+
+ \item How did Newcomb discover the Benford distribution?
+\begin{solution}
+The Benford distribution was discovered by looking at the wear and tear of logarithmic tables in old mathematical books. He concluded that one could distinguish between these digits in nature and their logarithms. Benford went onward and made the same discovery, but took it a step further with his research. 
+\end{solution}
+
+ \item What is the difference between `natural' and `unnatural' numbers according to Benford?
+\begin{solution}
+Benford believes that natural numbers are those that have deviations from random behavior. Unnatural numbers are tampered with. As they are more randomized by humans rather than nature, the vote-count fraud will produce a distribution different from the Benford distribution, in turn, making it detectable for election fraud. 
+\end{solution}
+
+ \item What is the purpose of the Chi-square test?
+\begin{solution}
+Kind of hinting to the above question, the Chi-square distribution is useful to detect for election fraud when the vote-count follows a distribution that isn't from the Benford distribution. 
+\end{solution}
+
+ \item Why does ignoring information in the data tend to lead to a less-powerful test?
+\begin{solution}
+In the case of the Benford test, it is superior to the normal approximation we have seen in previous sections. The Benford test uses the entire distribution of leading digits, and because more information is used, it will be more powerful. This being said, ignoring information and not using all of it could lead to a bad test and no detection of counting fraud. 
+\end{solution}
+
+\end{enumerate}
+
+
+
+
+\subsection*{Conceptual Extensions}
+\begin{enumerate}
+
+ \item Flip a fair coin 1000 times and create a histogram of run length. Estimate the average run length. Now, simulate those 1000 flips by hand. That is, randomly write out H and T values as you \emph{think} would arise from flipping a coin. Create a histogram of run length and determine the average run length in your fake data. Compare the results.
+\begin{solution}
+We will use R for this. 
+\begin{codein}
+
+headAndtail <- function(n, x, p){
+
+  sample = rbinom(1000, 1, 0.5)
+
+  runs <- diff(sample)
+  n = 0
+  for(i in 1:1000){
+    if(runs[i]==0){
+      n = n+1
+    }
+    
+  }
+  print(n)
+  hist(n)
+  print(mean(n))
+}
+\end{codein}
+Make sure you know what the code is doing.
+\end{solution}
+
+ \item Why is the expected distribution of initial digits not uniform? What is the intuition behind the Benford distribution?
+\begin{solution}
+The intuition behind the Benford distribution was the logarithm function, as that is how the pattern of the leading digits was recognized. Because of the log function that is being applied, like on page 105, the probability of the distributions decacy. If it was a uniform distribution, then the probabilities would be the same and the graphic would be much more `box` like as opposed to the downwards slope.
+\end{solution}
+
+ \item What is the Central Limit Theorem, and how is it used in the quick example on page~\pageref{ex:digitTests-firstExample}?
+\begin{solution}
+The Central Limit Theorem (CLT) is araaguably the most imporrtant theorem in statistics. Let X  be a random variable with a mean $\mu$ and finite variance $\sigma^{2}$. Let us draw a random sample of size $\emph{n}$ from this distribution. Then, as $\emph{n}$ gets larger, the distribution of the sample sums converge to normal. In this example, it rapidly comes into play because of the large sample size ($\emph{n} = 34$).
+\end{solution}
+
+ \item Why is 10 the usual base of the logarithm used in the Benford test? Would using a different base work equally well?
+\begin{solution}
+Using a different base other than ten doesn't matter, just so long as you are consistent with that base in all your calculations. Statisticans, mathmaticians, and other logarithm users typicall go with the generic base 10, just out of habit. Plus, most programs have the log function set at base 10, so you would need to change it and add a bit more work for yourself if you wanted a different base. 
+\end{solution}
+
+ \item What is the ``Two Policeman and a Drunk'' theorem and why is it useful in proofs?
+\begin{solution}
+The Two Policeman and a Drunk theorem (otherwise known as the Squeeze theorem) is regarding the limit of a function that is between two other functions. It is a visual to imagine two policemen walking a drunk man to a prison cell. If the officers are going to the cell, then (even if the drunk man is wobbling about) he will also end up in the cell. It is useful in proofs because it can give us insight to the limit, simplifying the problem without much hassle. 
+\end{solution}
+
+ \item In Figure~\ref{fig:digitTests-benforddistributionAllTheta}, at what points is the mean digit the greatest?
+\begin{solution}
+The mean is the greatest at the discrete digits 1 through ten (so 1, 2, 3, ... , 10). 
+\end{solution}
+
+ \item Why would one expect the likelihood simulation method of Section~\ref{sec:digitTests-lsm} to produce a less-powerful test than either of the two multinomial averaging methods of Section~\ref{sec:digitTests-ma}?
+\begin{solution}
+We have more information in the multinomial averaging than just a likelihood simulation. Because we are averaging more Benford distributions or thetas (using more expected leading digit frequencies), so both of the multinomial methofs are superior than the likelihood simulation. 
+\end{solution}
+
+ \item Which of the two multinomial averaging methods of Section~\ref{sec:digitTests-ma} would you expect to be more powerful?
+\begin{solution}
+I would expect the second multinomial method to be more powerful. It averages up multiple Benford distributions which really optimizes the information gain. But, there will be cases in which the two multinomial methods are strikingly close. 
+\end{solution}
+
+ \item What conclusions can be drawn from Table~\ref{tab:digitTests-ma}?
+\begin{solution}
+Using a significance level of 0.001, we can conclude that there is no evidence of counting fraud in the elections. We are also able to compare MAI and MAII to determine how different (and similar) both of these tests really are. 
+\end{solution}
+\end{enumerate}
+
+
+
+
+\subsection*{Computational Extensions}
+\begin{enumerate}
+
+ \item Find the populations of all the countries in the world. Write down the initial digit of those populations. Determine if that initial digit follows the Benford distribution sufficiently closely.
+\begin{solution}
+I am just going to find countries with leading digits 1 through 9 and show the distribution. If you feel bold, go ahead and find them all. 
+\begin{center}
+\begin{tabular}{lccc}
+Country & Population & Leading\:digit & Benford \\
+\midrule
+China         & 1,439,323,776           & 1  & Yes \\
+United States          & 331,002,651          & 3  & Yes  \\
+Nigeria          & 206,139,589           & 2  & Yes  \\
+Argentina          & 45,195,774           & 4  & Yes  \\
+Servia       & 8,737,371           & 8  & No  \\
+South Korea          & 51,269,185           & 5  & Yes  \\
+Sierra Leone          & 7,976,983           & 7  & No  \\
+Belarus          & 9,449,323           & 9 & No  \\
+France          & 65,273,511           & 6  & Yes  \\
+\end{tabular}
+\end{center}
+After 6, the leading digits quit following the Beford Distribution. 
+\end{solution}
+
+ \item Find the populations of $n=100$ cities in the world. Write down the initial digit of those populations. Determine if that initial digit follows the Benford distribution sufficiently closely.
+\begin{solution}
+Like the above example, we can conclude which digits will and will not follow the Benford distribution. 
+\end{solution}
+
+ \item Some researchers claim that the ``Second digit Benford test'' is better for detecting problematic election counts. The ``Second digit Benford distribution,'' $\Benford_2$, has the same assumptions underlying the first digit test, it is just applied to the second digits. Determine the theoretical distribution of second digits. Test the Afghan data using $\Benford_2$.
+\begin{solution}
+For this problem, we will need to update some of our R functions:
+\begin{codein}
+getSecondDigit <- function(count) {
+  as.numeric(substring(count,2,2))
+}
+
+getSecondDigitDistribution <- function(count) {
+  ld = getSecondDigit(count)
+  tabulate(ld,9)
+}
+
+SecondBenfordTest <- function(counts) {
+  SecDist = getSecondDigitDistribution(counts)
+chisq.test(SecDist, log10(1+1/(1:9)))
+}
+\end{codein}
+
+Then, we will run the functions like before:
+\begin{codein}
+SecondBenfordTest(d[,10])
+SecondBenfordTest(d[,13])
+SecondBenfordTest(d[,20])
+SecondBenfordTest(d[,31])
+\end{codein}
+
+We will get something like this:
+\begin{center}
+\begin{tabular}{lccc}
+Candidate & p-value \\
+\midrule
+Ashraf Ghani Ahmadzai         & 0.3045\\
+Dr. Abdullah Abdullah          & 0.2705 \\
+Hamed Karzai         & 0.3045\\
+Ramazan Bashardost         &0.2867 \\
+\end{tabular}
+\end{center}
+
+We can determine that there is no sinificant evidence of fraud in this electiion, even using the second Benford test. Notice that the p-values did decrease, so the second Benford distribution could be useful. 
+\end{solution}
+
+\end{enumerate}
+
+
+
+
